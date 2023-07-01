@@ -1,0 +1,17 @@
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Data\bin\Debug\net6.0\GepardOOD.Data.deps.json
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Data\bin\Debug\net6.0\GepardOOD.Data.runtimeconfig.json
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Data\bin\Debug\net6.0\GepardOOD.Data.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Data\bin\Debug\net6.0\GepardOOD.Data.pdb
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Data\obj\Debug\net6.0\GepardOOD.Data.csproj.AssemblyReference.cache
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Data\obj\Debug\net6.0\GepardOOD.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Data\obj\Debug\net6.0\GepardOOD.Data.AssemblyInfoInputs.cache
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Data\obj\Debug\net6.0\GepardOOD.Data.AssemblyInfo.cs
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Data\obj\Debug\net6.0\GepardOOD.Data.csproj.CoreCompileInputs.cache
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Data\obj\Debug\net6.0\GepardOOD.Data.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Data\obj\Debug\net6.0\refint\GepardOOD.Data.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Data\obj\Debug\net6.0\GepardOOD.Data.pdb
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Data\obj\Debug\net6.0\GepardOOD.Data.genruntimeconfig.cache
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Data\obj\Debug\net6.0\ref\GepardOOD.Data.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Data\bin\Debug\net6.0\GepardOOD.Common.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Data\bin\Debug\net6.0\GepardOOD.Common.pdb
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Data\obj\Debug\net6.0\GepardOOD.Data.csproj.CopyComplete

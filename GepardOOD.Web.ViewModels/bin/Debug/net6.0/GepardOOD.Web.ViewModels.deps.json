@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "GepardOOD.Web.ViewModels/1.0.0": {
+        "dependencies": {
+          "GepardOOD.Common": "1.0.0"
+        },
+        "runtime": {
+          "GepardOOD.Web.ViewModels.dll": {}
+        }
+      },
+      "GepardOOD.Common/1.0.0": {
+        "runtime": {
+          "GepardOOD.Common.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "GepardOOD.Web.ViewModels/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GepardOOD.Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

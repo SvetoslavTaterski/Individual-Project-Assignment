@@ -1,0 +1,15 @@
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.ViewModels\bin\Debug\net6.0\GepardOOD.Web.ViewModels.deps.json
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.ViewModels\bin\Debug\net6.0\GepardOOD.Web.ViewModels.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.ViewModels\bin\Debug\net6.0\GepardOOD.Web.ViewModels.pdb
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.ViewModels\obj\Debug\net6.0\GepardOOD.Web.ViewModels.csproj.AssemblyReference.cache
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.ViewModels\obj\Debug\net6.0\GepardOOD.Web.ViewModels.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.ViewModels\obj\Debug\net6.0\GepardOOD.Web.ViewModels.AssemblyInfoInputs.cache
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.ViewModels\obj\Debug\net6.0\GepardOOD.Web.ViewModels.AssemblyInfo.cs
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.ViewModels\obj\Debug\net6.0\GepardOOD.Web.ViewModels.csproj.CoreCompileInputs.cache
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.ViewModels\obj\Debug\net6.0\GepardOOD.Web.ViewModels.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.ViewModels\obj\Debug\net6.0\refint\GepardOOD.Web.ViewModels.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.ViewModels\obj\Debug\net6.0\GepardOOD.Web.ViewModels.pdb
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.ViewModels\obj\Debug\net6.0\ref\GepardOOD.Web.ViewModels.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.ViewModels\bin\Debug\net6.0\GepardOOD.Common.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.ViewModels\bin\Debug\net6.0\GepardOOD.Common.pdb
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.ViewModels\obj\Debug\net6.0\GepardOOD.Web.ViewModels.csproj.CopyComplete

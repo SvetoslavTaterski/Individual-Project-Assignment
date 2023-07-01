@@ -1,0 +1,12 @@
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Common\bin\Debug\net6.0\GepardOOD.Common.deps.json
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Common\bin\Debug\net6.0\GepardOOD.Common.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Common\bin\Debug\net6.0\GepardOOD.Common.pdb
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Common\obj\Debug\net6.0\GepardOOD.Common.csproj.AssemblyReference.cache
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Common\obj\Debug\net6.0\GepardOOD.Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Common\obj\Debug\net6.0\GepardOOD.Common.AssemblyInfoInputs.cache
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Common\obj\Debug\net6.0\GepardOOD.Common.AssemblyInfo.cs
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Common\obj\Debug\net6.0\GepardOOD.Common.csproj.CoreCompileInputs.cache
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Common\obj\Debug\net6.0\GepardOOD.Common.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Common\obj\Debug\net6.0\refint\GepardOOD.Common.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Common\obj\Debug\net6.0\GepardOOD.Common.pdb
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Common\obj\Debug\net6.0\ref\GepardOOD.Common.dll

@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33627.172
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GepardOOD.Web", "GepardOOD.Web.csproj", "{88CC27E5-B8CF-4DE0-A4AF-7FB56DB50985}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GepardOOD.Common", "..\GepardOOD.Common\GepardOOD.Common.csproj", "{2480DE37-1FB8-471C-AF09-BC558980A991}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{598FA8FB-F2E5-4FED-BBB9-97C8983403BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{595620FC-48A0-40AA-BE34-1C611660F708}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GepardOOD.Data", "..\GepardOOD.Data\GepardOOD.Data.csproj", "{081F3C49-1611-4A16-A6FA-3785B95E854A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GepardOOD.Data.Models", "..\GepardOOD.Data.Models\GepardOOD.Data.Models.csproj", "{CBE2526F-76AB-4B52-A52F-78DE55F3B09E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GepardOOD.Web.ViewModels", "..\GepardOOD.Web.ViewModels\GepardOOD.Web.ViewModels.csproj", "{08ECA44B-76BA-4B0B-A382-21213F047552}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{88CC27E5-B8CF-4DE0-A4AF-7FB56DB50985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88CC27E5-B8CF-4DE0-A4AF-7FB56DB50985}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88CC27E5-B8CF-4DE0-A4AF-7FB56DB50985}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88CC27E5-B8CF-4DE0-A4AF-7FB56DB50985}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2480DE37-1FB8-471C-AF09-BC558980A991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2480DE37-1FB8-471C-AF09-BC558980A991}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2480DE37-1FB8-471C-AF09-BC558980A991}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2480DE37-1FB8-471C-AF09-BC558980A991}.Release|Any CPU.Build.0 = Release|Any CPU
+		{081F3C49-1611-4A16-A6FA-3785B95E854A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{081F3C49-1611-4A16-A6FA-3785B95E854A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{081F3C49-1611-4A16-A6FA-3785B95E854A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{081F3C49-1611-4A16-A6FA-3785B95E854A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBE2526F-76AB-4B52-A52F-78DE55F3B09E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBE2526F-76AB-4B52-A52F-78DE55F3B09E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBE2526F-76AB-4B52-A52F-78DE55F3B09E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBE2526F-76AB-4B52-A52F-78DE55F3B09E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08ECA44B-76BA-4B0B-A382-21213F047552}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08ECA44B-76BA-4B0B-A382-21213F047552}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08ECA44B-76BA-4B0B-A382-21213F047552}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08ECA44B-76BA-4B0B-A382-21213F047552}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{88CC27E5-B8CF-4DE0-A4AF-7FB56DB50985} = {598FA8FB-F2E5-4FED-BBB9-97C8983403BA}
+		{081F3C49-1611-4A16-A6FA-3785B95E854A} = {595620FC-48A0-40AA-BE34-1C611660F708}
+		{CBE2526F-76AB-4B52-A52F-78DE55F3B09E} = {595620FC-48A0-40AA-BE34-1C611660F708}
+		{08ECA44B-76BA-4B0B-A382-21213F047552} = {598FA8FB-F2E5-4FED-BBB9-97C8983403BA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FCC4EEB0-8C04-4009-8B88-AC4E3B494480}
+	EndGlobalSection
+EndGlobal

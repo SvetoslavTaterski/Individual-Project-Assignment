@@ -6,6 +6,7 @@ namespace GepardOOD.Data.Models
     {
         public ApplicationUser()
         {
+            Id = Guid.NewGuid();
             BoughtBeers = new HashSet<Beer>();
         }
         

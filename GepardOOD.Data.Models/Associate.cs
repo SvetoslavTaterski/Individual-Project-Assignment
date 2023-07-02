@@ -8,6 +8,7 @@ namespace GepardOOD.Data.Models
     {
         public Associate()
         {
+            Id = Guid.NewGuid();
             Beers = new HashSet<Beer>();
             Sodas = new HashSet<Soda>();
             Wines = new HashSet<Wine>();

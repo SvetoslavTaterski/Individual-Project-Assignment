@@ -17,6 +17,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GepardOOD.Common\GepardOOD.Common.csproj" />
+    <ProjectReference Include="..\GepardOOD.Data.Models\GepardOOD.Data.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

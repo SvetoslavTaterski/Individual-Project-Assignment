@@ -967,6 +967,7 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "GepardOOD.Common": "1.0.0",
+          "GepardOOD.Data.Models": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.15",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.15"
         },
@@ -975,6 +976,20 @@
         },
         "runtime": {
           "bin/placeholder/GepardOOD.Data.dll": {}
+        }
+      },
+      "GepardOOD.Data.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "GepardOOD.Common": "1.0.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.15"
+        },
+        "compile": {
+          "bin/placeholder/GepardOOD.Data.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GepardOOD.Data.Models.dll": {}
         }
       },
       "GepardOOD.Web.ViewModels/1.0.0": {
@@ -2491,6 +2506,11 @@
       "path": "../GepardOOD.Data/GepardOOD.Data.csproj",
       "msbuildProject": "../GepardOOD.Data/GepardOOD.Data.csproj"
     },
+    "GepardOOD.Data.Models/1.0.0": {
+      "type": "project",
+      "path": "../GepardOOD.Data.Models/GepardOOD.Data.Models.csproj",
+      "msbuildProject": "../GepardOOD.Data.Models/GepardOOD.Data.Models.csproj"
+    },
     "GepardOOD.Web.ViewModels/1.0.0": {
       "type": "project",
       "path": "../GepardOOD.Web.ViewModels/GepardOOD.Web.ViewModels.csproj",
@@ -2501,6 +2521,7 @@
     "net6.0": [
       "GepardOOD.Common >= 1.0.0",
       "GepardOOD.Data >= 1.0.0",
+      "GepardOOD.Data.Models >= 1.0.0",
       "GepardOOD.Web.ViewModels >= 1.0.0",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 6.0.15",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.15",
@@ -2543,6 +2564,9 @@
           "projectReferences": {
             "C:\\Users\\Acer\\OneDrive\\Desktop\\SoftUni\\ASP.NET\\Individual Project Assignment\\GepardOOD.Common\\GepardOOD.Common.csproj": {
               "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\SoftUni\\ASP.NET\\Individual Project Assignment\\GepardOOD.Common\\GepardOOD.Common.csproj"
+            },
+            "C:\\Users\\Acer\\OneDrive\\Desktop\\SoftUni\\ASP.NET\\Individual Project Assignment\\GepardOOD.Data.Models\\GepardOOD.Data.Models.csproj": {
+              "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\SoftUni\\ASP.NET\\Individual Project Assignment\\GepardOOD.Data.Models\\GepardOOD.Data.Models.csproj"
             },
             "C:\\Users\\Acer\\OneDrive\\Desktop\\SoftUni\\ASP.NET\\Individual Project Assignment\\GepardOOD.Data\\GepardOOD.Data.csproj": {
               "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\SoftUni\\ASP.NET\\Individual Project Assignment\\GepardOOD.Data\\GepardOOD.Data.csproj"

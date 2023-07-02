@@ -9,6 +9,7 @@
       "GepardOOD.Data/1.0.0": {
         "dependencies": {
           "GepardOOD.Common": "1.0.0",
+          "GepardOOD.Data.Models": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.15",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.15",
           "Microsoft.EntityFrameworkCore.Tools": "6.0.15"
@@ -551,6 +552,15 @@
         "runtime": {
           "GepardOOD.Common.dll": {}
         }
+      },
+      "GepardOOD.Data.Models/1.0.0": {
+        "dependencies": {
+          "GepardOOD.Common": "1.0.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.15"
+        },
+        "runtime": {
+          "GepardOOD.Data.Models.dll": {}
+        }
       }
     }
   },
@@ -897,6 +907,11 @@
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
     },
     "GepardOOD.Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GepardOOD.Data.Models/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

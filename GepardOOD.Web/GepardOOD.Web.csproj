@@ -19,6 +19,8 @@
     <ProjectReference Include="..\GepardOOD.Common\GepardOOD.Common.csproj" />
     <ProjectReference Include="..\GepardOOD.Data.Models\GepardOOD.Data.Models.csproj" />
     <ProjectReference Include="..\GepardOOD.Data\GepardOOD.Data.csproj" />
+    <ProjectReference Include="..\GepardOOD.Services.Data\GepardOOD.Services.Data.csproj" />
+    <ProjectReference Include="..\GepardOOD.Web.Infrastructure\GepardOOD.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\GepardOOD.Web.ViewModels\GepardOOD.Web.ViewModels.csproj" />
   </ItemGroup>
 

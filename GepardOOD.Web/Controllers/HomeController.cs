@@ -1,4 +1,5 @@
-﻿using GepardOOD.Web.ViewModels.Home;
+﻿using GepardOOD.Services.Data.Interfaces;
+using GepardOOD.Web.ViewModels.Home;
 
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -7,15 +8,18 @@ namespace GepardOOD.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IBeerService _beerService;
 
-        public HomeController()
+        public HomeController(IBeerService beerService)
         {
-            
+            _beerService = beerService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            IEnumerable<IndexViewModel> viewModel = await _beerService.ThreeBeersAsync();
+
+            return View(viewModel);
         }
 
 

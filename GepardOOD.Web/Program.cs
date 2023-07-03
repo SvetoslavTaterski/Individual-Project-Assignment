@@ -1,6 +1,7 @@
 using GepardOOD.Data.Models;
+using GepardOOD.Services.Data.Interfaces;
 using GepardOOD.Web.Data;
-
+using GepardOOD.Web.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace GepardOOD.Web
@@ -26,6 +27,9 @@ namespace GepardOOD.Web
                     options.Password.RequiredLength = 4;
                 })
                 .AddEntityFrameworkStores<GepardOODDbContext>();
+
+            builder.Services.AddApplicationServices(typeof(IBeerService));
+
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();

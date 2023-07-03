@@ -11,6 +11,8 @@
           "GepardOOD.Common": "1.0.0",
           "GepardOOD.Data": "1.0.0",
           "GepardOOD.Data.Models": "1.0.0",
+          "GepardOOD.Services.Data": "1.0.0",
+          "GepardOOD.Web.Infrastructure": "1.0.0",
           "GepardOOD.Web.ViewModels": "1.0.0",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "6.0.15",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.15",
@@ -572,6 +574,26 @@
           "GepardOOD.Data.Models.dll": {}
         }
       },
+      "GepardOOD.Services.Data/1.0.0": {
+        "dependencies": {
+          "GepardOOD.Common": "1.0.0",
+          "GepardOOD.Data": "1.0.0",
+          "GepardOOD.Data.Models": "1.0.0",
+          "GepardOOD.Web.ViewModels": "1.0.0"
+        },
+        "runtime": {
+          "GepardOOD.Services.Data.dll": {}
+        }
+      },
+      "GepardOOD.Web.Infrastructure/1.0.0": {
+        "dependencies": {
+          "GepardOOD.Services.Data": "1.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
+        },
+        "runtime": {
+          "GepardOOD.Web.Infrastructure.dll": {}
+        }
+      },
       "GepardOOD.Web.ViewModels/1.0.0": {
         "dependencies": {
           "GepardOOD.Common": "1.0.0"
@@ -963,6 +985,16 @@
       "sha512": ""
     },
     "GepardOOD.Data.Models/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GepardOOD.Services.Data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GepardOOD.Web.Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -992,6 +992,36 @@
           "bin/placeholder/GepardOOD.Data.Models.dll": {}
         }
       },
+      "GepardOOD.Services.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "GepardOOD.Common": "1.0.0",
+          "GepardOOD.Data": "1.0.0",
+          "GepardOOD.Data.Models": "1.0.0",
+          "GepardOOD.Web.ViewModels": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/GepardOOD.Services.Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GepardOOD.Services.Data.dll": {}
+        }
+      },
+      "GepardOOD.Web.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "GepardOOD.Services.Data": "1.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
+        },
+        "compile": {
+          "bin/placeholder/GepardOOD.Web.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GepardOOD.Web.Infrastructure.dll": {}
+        }
+      },
       "GepardOOD.Web.ViewModels/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -2511,6 +2541,16 @@
       "path": "../GepardOOD.Data.Models/GepardOOD.Data.Models.csproj",
       "msbuildProject": "../GepardOOD.Data.Models/GepardOOD.Data.Models.csproj"
     },
+    "GepardOOD.Services.Data/1.0.0": {
+      "type": "project",
+      "path": "../GepardOOD.Services.Data/GepardOOD.Services.Data.csproj",
+      "msbuildProject": "../GepardOOD.Services.Data/GepardOOD.Services.Data.csproj"
+    },
+    "GepardOOD.Web.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../GepardOOD.Web.Infrastructure/GepardOOD.Web.Infrastructure.csproj",
+      "msbuildProject": "../GepardOOD.Web.Infrastructure/GepardOOD.Web.Infrastructure.csproj"
+    },
     "GepardOOD.Web.ViewModels/1.0.0": {
       "type": "project",
       "path": "../GepardOOD.Web.ViewModels/GepardOOD.Web.ViewModels.csproj",
@@ -2522,6 +2562,8 @@
       "GepardOOD.Common >= 1.0.0",
       "GepardOOD.Data >= 1.0.0",
       "GepardOOD.Data.Models >= 1.0.0",
+      "GepardOOD.Services.Data >= 1.0.0",
+      "GepardOOD.Web.Infrastructure >= 1.0.0",
       "GepardOOD.Web.ViewModels >= 1.0.0",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 6.0.15",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.15",
@@ -2570,6 +2612,12 @@
             },
             "C:\\Users\\Acer\\OneDrive\\Desktop\\SoftUni\\ASP.NET\\Individual Project Assignment\\GepardOOD.Data\\GepardOOD.Data.csproj": {
               "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\SoftUni\\ASP.NET\\Individual Project Assignment\\GepardOOD.Data\\GepardOOD.Data.csproj"
+            },
+            "C:\\Users\\Acer\\OneDrive\\Desktop\\SoftUni\\ASP.NET\\Individual Project Assignment\\GepardOOD.Services.Data\\GepardOOD.Services.Data.csproj": {
+              "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\SoftUni\\ASP.NET\\Individual Project Assignment\\GepardOOD.Services.Data\\GepardOOD.Services.Data.csproj"
+            },
+            "C:\\Users\\Acer\\OneDrive\\Desktop\\SoftUni\\ASP.NET\\Individual Project Assignment\\GepardOOD.Web.Infrastructure\\GepardOOD.Web.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\SoftUni\\ASP.NET\\Individual Project Assignment\\GepardOOD.Web.Infrastructure\\GepardOOD.Web.Infrastructure.csproj"
             },
             "C:\\Users\\Acer\\OneDrive\\Desktop\\SoftUni\\ASP.NET\\Individual Project Assignment\\GepardOOD.Web.ViewModels\\GepardOOD.Web.ViewModels.csproj": {
               "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\SoftUni\\ASP.NET\\Individual Project Assignment\\GepardOOD.Web.ViewModels\\GepardOOD.Web.ViewModels.csproj"

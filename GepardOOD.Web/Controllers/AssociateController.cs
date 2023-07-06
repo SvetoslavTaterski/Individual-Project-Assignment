@@ -1,10 +1,10 @@
-﻿using GepardOOD.Services.Data.Interfaces;
-
-namespace GepardOOD.Web.Controllers
+﻿namespace GepardOOD.Web.Controllers
 {
 	using Microsoft.AspNetCore.Authorization;
 	using Microsoft.AspNetCore.Mvc;
 
+	using GepardOOD.Services.Data.Interfaces;
+    using static Common.NotificationMessagesConstants;
 	using Infrastructure;
 
 
@@ -27,7 +27,8 @@ namespace GepardOOD.Web.Controllers
 
 	        if (isAgent)
 	        {
-		        return BadRequest();
+		        TempData[ErrorMessage] = "You are already an Associate!";
+                return RedirectToAction("Index","Home");
 	        }
 
             return View();

@@ -34,6 +34,7 @@ namespace GepardOOD.Web.ViewModels.Beer
 		[Range(typeof(decimal),PriceMinValue,PriceMaxValue)]
 		public decimal Price { get; set; }
 
+		[Display(Name = "Category")]
 		public int CategoryId { get; set; }
 
 		public IEnumerable<BeerSelectCategoryFormModel> BeerCategories { get; set; }

@@ -1,0 +1,14 @@
+﻿@model BeerFormModel
+@{
+	ViewData["Title"] = "Add Beer";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<partial name="_BeerFormPartial" model="@Model"/>
+
+@section Scripts
+{
+	<partial name="_ValidationScriptsPartial"/>
+}

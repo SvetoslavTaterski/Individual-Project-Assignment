@@ -24,12 +24,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzb2NpYXRlXEJlY29tZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Acer/OneDrive/Desktop/SoftUni/ASP.NET/Individual Project Assignment/GepardOOD.Web/Views/Beer/Add.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmVlclxBZGQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Acer/OneDrive/Desktop/SoftUni/ASP.NET/Individual Project Assignment/GepardOOD.Web/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Acer/OneDrive/Desktop/SoftUni/ASP.NET/Individual Project Assignment/GepardOOD.Web/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Acer/OneDrive/Desktop/SoftUni/ASP.NET/Individual Project Assignment/GepardOOD.Web/Views/Shared/_BeerFormPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9CZWVyRm9ybVBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Acer/OneDrive/Desktop/SoftUni/ASP.NET/Individual Project Assignment/GepardOOD.Web/Views/Shared/_LoginPartial.cshtml]

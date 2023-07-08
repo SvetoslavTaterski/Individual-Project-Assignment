@@ -13,5 +13,11 @@ namespace GepardOOD.Web.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Add()
+        {
+
+        }
     }
 }

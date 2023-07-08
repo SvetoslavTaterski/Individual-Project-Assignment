@@ -9,5 +9,7 @@ namespace GepardOOD.Services.Data.Interfaces
 		Task<bool> AssociateExistByPhoneNumberAsync(string phoneNumber);
 
 		Task Create(string userId, BecomeAssociateFormModel model);
+
+		Task<string?> GetAssociateIdByUserIdAsync(string userId);
 	}
 }

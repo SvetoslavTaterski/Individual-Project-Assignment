@@ -28,5 +28,13 @@ namespace GepardOOD.Services.Data
 
 			return beerCategories;
 		}
+
+		public async Task<bool> ExistsByIdAsync(int id)
+		{
+			bool result = await _dbContext
+				.BeerCategories.AnyAsync(c => c.Id == id);
+
+			return result;
+		}
 	}
 }

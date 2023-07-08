@@ -46,5 +46,19 @@ namespace GepardOOD.Services.Data
 
 
 		}
+
+		public async Task<string?> GetAssociateIdByUserIdAsync(string userId)
+		{
+			Associate? associate = await _data
+				.Associates
+				.FirstOrDefaultAsync(a => a.UserId.ToString() == userId);
+
+			if (associate == null)
+			{
+				return null;
+			}
+
+			return associate.Id.ToString();
+		}
 	}
 }

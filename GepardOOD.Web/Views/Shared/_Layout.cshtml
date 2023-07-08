@@ -15,52 +15,122 @@
 </head>
 <body>
 	<partial name="_NotificationsPartial" />
-<header>
-	<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-		<div class="container-fluid">
-			<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Gepard OOD</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-			        aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-				<ul class="navbar-nav flex-grow-1">
-					<li class="nav-item">
-						<a class="nav-link text-dark" asp-area="" asp-controller="Beer" asp-action="All">All Beers</a>
-					</li>
-					@if (User.Identity?.IsAuthenticated ?? false)
-					{
-						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-controller="Beer" asp-action="Mine">My Beer Order</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-controller="Beer" asp-action="Add">Add Beer to Order</a>
-						</li>
-					}
-				</ul>
-				<partial name="_LoginPartial"/>
+	<header>
+		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+			<div class="container-fluid">
+				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Gepard OOD</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+					<ul class="navbar-nav flex-grow-1">
+						@if (User.Identity?.IsAuthenticated ?? false)
+						{
+							<li class="nav-item dropdown">
+								<div class="dropdown">
+									<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">Beers</button>
+									<ul class="dropdown-menu">
+										<li class="nav-item">
+											<a class="nav-link text-dark" asp-area="" asp-controller="Beer" asp-action="All">All Beers</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link text-dark" asp-area="" asp-controller="Beer" asp-action="Mine">My Beer Order</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link text-dark" asp-area="" asp-controller="Beer" asp-action="Add">Add new Beer</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li class="nav-item dropdown">
+								<div class="dropdown">
+									<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">Soda</button>
+									<ul class="dropdown-menu">
+										<li class="nav-item">
+											<a class="nav-link text-dark" asp-area="" asp-controller="Soda" asp-action="All">All Sodas</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link text-dark" asp-area="" asp-controller="Soda" asp-action="Mine">My Soda Order</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link text-dark" asp-area="" asp-controller="Soda" asp-action="Add">Add new Soda</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li class="nav-item dropdown">
+								<div class="dropdown">
+									<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">Wine</button>
+									<ul class="dropdown-menu">
+										<li class="nav-item">
+											<a class="nav-link text-dark" asp-area="" asp-controller="Wine" asp-action="All">All Wines</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link text-dark" asp-area="" asp-controller="Wine" asp-action="Mine">My Wine Order</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link text-dark" asp-area="" asp-controller="Wine" asp-action="Add">Add new Wine</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li class="nav-item dropdown">
+								<div class="dropdown">
+									<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">Whiskey</button>
+									<ul class="dropdown-menu">
+										<li class="nav-item">
+											<a class="nav-link text-dark" asp-area="" asp-controller="Whiskey" asp-action="All">All Whiskeys</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link text-dark" asp-area="" asp-controller="Whiskey" asp-action="Mine">My Whiskey Order</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link text-dark" asp-area="" asp-controller="Whiskey" asp-action="Add">Add new Whiskey</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+						}
+						else
+						{
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-controller="Beer" asp-action="All">All Beers</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-controller="Soda" asp-action="All">All Sodas</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-controller="Wine" asp-action="All">All Wines</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-controller="Whiskey" asp-action="All">All Whiskeys</a>
+							</li>
+						}
+					</ul>
+					<partial name="_LoginPartial" />
+				</div>
 			</div>
-		</div>
-	</nav>
-</header>
-<div class="container">
-	<main role="main" class="pb-3">
-		@RenderBody()
-	</main>
-</div>
-
-<footer class="border-top footer text-muted">
+		</nav>
+	</header>
 	<div class="container">
-		&copy; Gepard OOD @ReleaseYear
-		@if (DateTime.UtcNow.Year != ReleaseYear)
-		{
-			@Html.Raw($" - {DateTime.UtcNow.Year}")
-			;
-		}
+		<main role="main" class="pb-3">
+			@RenderBody()
+		</main>
 	</div>
-</footer>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
-@await RenderSectionAsync("Scripts", required: false)
+
+	<footer class="border-top footer text-muted">
+		<div class="container">
+			&copy; Gepard OOD @ReleaseYear
+			@if (DateTime.UtcNow.Year != ReleaseYear)
+			{
+				@Html.Raw($" - {DateTime.UtcNow.Year}")
+				;
+			}
+		</div>
+	</footer>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

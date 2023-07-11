@@ -57,7 +57,7 @@ namespace GepardOOD.Web.Controllers
 
 			if (!isAssociate)
 			{
-				TempData[ErrorMessage] = "You must become an associate in order to add new beers!";
+				TempData[ErrorMessage] = "You must become an associate in order to add new wines!";
 				return RedirectToAction("Become", "Associate");
 			}
 
@@ -83,7 +83,7 @@ namespace GepardOOD.Web.Controllers
 			}
 			catch (Exception e)
 			{
-				ModelState.AddModelError(string.Empty, "Unexpected error occurred while trying to add a new Beer! Please try again later or contact Administrator.");
+				ModelState.AddModelError(string.Empty, "Unexpected error occurred while trying to add a new Wine! Please try again later or contact Administrator.");
 
 				model.WineCategories = await _wineCategoryService.AllCategoriesAsync();
 

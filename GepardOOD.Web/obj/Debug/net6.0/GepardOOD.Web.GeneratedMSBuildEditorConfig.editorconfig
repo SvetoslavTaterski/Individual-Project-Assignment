@@ -48,12 +48,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Ob3RpZmljYXRpb25zUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Acer/OneDrive/Desktop/SoftUni/ASP.NET/Individual Project Assignment/GepardOOD.Web/Views/Shared/_SodaFormPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Tb2RhRm9ybVBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Acer/OneDrive/Desktop/SoftUni/ASP.NET/Individual Project Assignment/GepardOOD.Web/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Acer/OneDrive/Desktop/SoftUni/ASP.NET/Individual Project Assignment/GepardOOD.Web/Views/Shared/_WineFormPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9XaW5lRm9ybVBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Acer/OneDrive/Desktop/SoftUni/ASP.NET/Individual Project Assignment/GepardOOD.Web/Views/Soda/Add.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU29kYVxBZGQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Acer/OneDrive/Desktop/SoftUni/ASP.NET/Individual Project Assignment/GepardOOD.Web/Views/Wine/Add.cshtml]

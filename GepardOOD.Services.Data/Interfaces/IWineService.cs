@@ -1,5 +1,4 @@
-﻿using GepardOOD.Web.ViewModels.Beer;
-using GepardOOD.Web.ViewModels.Wine;
+﻿using GepardOOD.Web.ViewModels.Wine;
 
 namespace GepardOOD.Services.Data.Interfaces
 {

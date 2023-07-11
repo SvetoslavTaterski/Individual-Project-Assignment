@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 using static GepardOOD.Common.EntityValidationConstants.Wine;
 
 namespace GepardOOD.Data.Models

@@ -1,15 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
+
 using GepardOOD.Web.ViewModels.Category;
+using static GepardOOD.Common.EntityValidationConstants.Wine;
 
-using static GepardOOD.Common.EntityValidationConstants.Beer;
-
-namespace GepardOOD.Web.ViewModels.Beer
+namespace GepardOOD.Web.ViewModels.Wine
 {
-	public class BeerFormModel
+	public class WineFormModel
 	{
-		public BeerFormModel()
+		public WineFormModel()
 		{
-			BeerCategories = new HashSet<BeerSelectCategoryFormModel>();
+			WineCategories = new HashSet<WineSelectCategoryFormModel>();
 		}
 
 		public int Id { get; set; }
@@ -23,7 +23,7 @@ namespace GepardOOD.Web.ViewModels.Beer
 		public string Manufacturer { get; set; } = null!;
 
 		[Required]
-		[StringLength(DescriptionMaxLength,MinimumLength = DescriptionMinLength)]
+		[StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength)]
 		public string Description { get; set; } = null!;
 
 		[Required]
@@ -31,12 +31,12 @@ namespace GepardOOD.Web.ViewModels.Beer
 		[Display(Name = "Image link")]
 		public string ImageUrl { get; set; } = null!;
 
-		[Range(typeof(decimal),PriceMinValue,PriceMaxValue)]
+		[Range(typeof(decimal), PriceMinValue, PriceMaxValue)]
 		public decimal Price { get; set; }
 
 		[Display(Name = "Category")]
 		public int CategoryId { get; set; }
 
-		public IEnumerable<BeerSelectCategoryFormModel> BeerCategories { get; set; }
+		public IEnumerable<WineSelectCategoryFormModel> WineCategories { get; set; }
 	}
 }

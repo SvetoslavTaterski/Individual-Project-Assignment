@@ -1,4 +1,4 @@
-﻿@model WineFormModel
+﻿@model WhiskeyFormModel
 
 <div class="row">
 	<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
@@ -11,7 +11,7 @@
 			<div class="form-group">
 				<label asp-for="Manufacturer"></label>
 				<input asp-for="Manufacturer" class="form-control"
-				       placeholder="Manufacturer...">
+		placeholder="Manufacturer...">
 				<span asp-validation-for="Manufacturer" class="small text-danger"></span>
 			</div>
 			<div class="form-group">
@@ -34,7 +34,7 @@
 			<div class="form-group">
 				<label asp-for="CategoryId"></label>
 				<select asp-for="CategoryId" class="form-control">
-					@foreach (var category in Model.WineCategories)
+					@foreach (var category in Model.WhiskeyCategories)
 					{
 						<option value="@category.Id">@category.Name</option>
 					}
@@ -47,3 +47,4 @@
 		</form>
 	</div>
 </div>
+

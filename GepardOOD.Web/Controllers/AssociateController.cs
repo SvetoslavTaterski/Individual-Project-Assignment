@@ -1,15 +1,15 @@
 ﻿namespace GepardOOD.Web.Controllers
 {
-	using Microsoft.AspNetCore.Authorization;
-	using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
 
-	using GepardOOD.Services.Data.Interfaces;
+    using GepardOOD.Services.Data.Interfaces;
     using static Common.NotificationMessagesConstants;
-	using Infrastructure;
-	using ViewModels.Associate;
+    using Infrastructure;
+    using ViewModels.Associate;
+    using GepardOOD.Web.Infrastructure.Extensions;
 
-
-	[Authorize]
+    [Authorize]
     public class AssociateController : Controller
     {
         private readonly IAssociateService _associateService;

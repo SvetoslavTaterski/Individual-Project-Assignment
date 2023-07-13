@@ -87,3 +87,13 @@ C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\Gep
 C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web\bin\Debug\net6.0\GepardOOD.Services.Data.pdb
 C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web\bin\Debug\net6.0\GepardOOD.Web.Infrastructure.dll
 C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web\bin\Debug\net6.0\GepardOOD.Web.Infrastructure.pdb
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web\bin\Debug\net6.0\Microsoft.AspNetCore.Razor.Language.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web\bin\Debug\net6.0\Microsoft.CodeAnalysis.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web\bin\Debug\net6.0\Microsoft.CodeAnalysis.Razor.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

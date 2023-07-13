@@ -2,6 +2,8 @@ using GepardOOD.Data.Models;
 using GepardOOD.Services.Data.Interfaces;
 using GepardOOD.Web.Data;
 using GepardOOD.Web.Infrastructure.Extensions;
+using GepardOOD.Web.Infrastructure.ModelBinders;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace GepardOOD.Web
@@ -30,7 +32,11 @@ namespace GepardOOD.Web
 
             builder.Services.AddApplicationServices(typeof(IBeerService));
 
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews()
+	            .AddMvcOptions(opt =>
+	            {
+		            opt.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+	            });
 
             var app = builder.Build();
 

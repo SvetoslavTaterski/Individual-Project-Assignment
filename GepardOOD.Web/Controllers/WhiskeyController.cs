@@ -1,5 +1,4 @@
 ﻿using GepardOOD.Services.Data.Interfaces;
-using GepardOOD.Web.Infrastructure;
 using GepardOOD.Web.ViewModels.Whiskey;
 using static GepardOOD.Common.NotificationMessagesConstants;
 
@@ -7,10 +6,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using GepardOOD.Services.Data;
 using GepardOOD.Web.ViewModels.Wine;
+using GepardOOD.Web.Infrastructure.Extensions;
 
 namespace GepardOOD.Web.Controllers
 {
-	[Authorize]
+    [Authorize]
 	public class WhiskeyController : Controller
 	{
 		private readonly IAssociateService _associateService;

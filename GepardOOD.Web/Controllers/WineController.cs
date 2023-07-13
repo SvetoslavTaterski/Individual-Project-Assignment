@@ -1,15 +1,14 @@
 ﻿using static GepardOOD.Common.NotificationMessagesConstants;
 using GepardOOD.Services.Data.Interfaces;
-using GepardOOD.Web.Infrastructure;
 using GepardOOD.Web.ViewModels.Wine;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using GepardOOD.Web.Infrastructure.Extensions;
 
 namespace GepardOOD.Web.Controllers
 {
-	[Authorize]
+    [Authorize]
 	public class WineController : Controller
 	{
 		private readonly IWineCategoryService _wineCategoryService;

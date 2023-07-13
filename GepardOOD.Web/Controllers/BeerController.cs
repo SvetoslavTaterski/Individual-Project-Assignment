@@ -1,14 +1,14 @@
 ﻿using GepardOOD.Services.Data.Interfaces;
-using GepardOOD.Web.Infrastructure;
 using GepardOOD.Web.ViewModels.Beer;
 using static GepardOOD.Common.NotificationMessagesConstants;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using GepardOOD.Web.Infrastructure.Extensions;
 
 namespace GepardOOD.Web.Controllers
 {
-	[Authorize]
+    [Authorize]
 	public class BeerController : Controller
 	{
 		private readonly IBeerCategoryService _beerCategoryService;

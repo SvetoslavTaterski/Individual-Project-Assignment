@@ -10,6 +10,7 @@
     <ProjectReference Include="..\GepardOOD.Common\GepardOOD.Common.csproj" />
     <ProjectReference Include="..\GepardOOD.Data.Models\GepardOOD.Data.Models.csproj" />
     <ProjectReference Include="..\GepardOOD.Data\GepardOOD.Data.csproj" />
+    <ProjectReference Include="..\GepardOOD.Services.Data.Models\GepardOOD.Services.Data.Models.csproj" />
     <ProjectReference Include="..\GepardOOD.Web.ViewModels\GepardOOD.Web.ViewModels.csproj" />
   </ItemGroup>
 

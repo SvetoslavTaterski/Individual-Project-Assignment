@@ -21,3 +21,5 @@ C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\Gep
 C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.Infrastructure\obj\Debug\net6.0\refint\GepardOOD.Web.Infrastructure.dll
 C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.Infrastructure\obj\Debug\net6.0\GepardOOD.Web.Infrastructure.pdb
 C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.Infrastructure\obj\Debug\net6.0\ref\GepardOOD.Web.Infrastructure.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.Infrastructure\bin\Debug\net6.0\GepardOOD.Services.Data.Models.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.Infrastructure\bin\Debug\net6.0\GepardOOD.Services.Data.Models.pdb

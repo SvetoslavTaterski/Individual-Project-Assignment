@@ -97,3 +97,5 @@ C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\Gep
 C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
 C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web\bin\Debug\net6.0\GepardOOD.Services.Data.Models.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web\bin\Debug\net6.0\GepardOOD.Services.Data.Models.pdb

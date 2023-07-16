@@ -1,4 +1,5 @@
 ﻿using GepardOOD.Services.Data.Interfaces;
+using GepardOOD.Services.Data.Models.Beer;
 using GepardOOD.Web.ViewModels.Beer;
 using static GepardOOD.Common.NotificationMessagesConstants;
 
@@ -25,9 +26,17 @@ namespace GepardOOD.Web.Controllers
 		}
 
 		[AllowAnonymous]
-		public async Task<IActionResult> All()
+		[HttpGet]
+		public async Task<IActionResult> All([FromQuery]AllBeerQueryModel queryModel)
 		{
-			return Ok();
+			AllBeersFilteredAndPagedServiceModel serviceModel =
+				await _beerService.AllAsync(queryModel);
+
+			queryModel.Beers = serviceModel.Beers;
+			queryModel.TotalBeers = serviceModel.TotalBeersCount;
+			queryModel.Categories = await _beerCategoryService.AllCategoryNamesAsync();
+
+			return View(queryModel);
 		}
 
 		[HttpGet]

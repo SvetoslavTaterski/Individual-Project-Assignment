@@ -7,5 +7,7 @@ namespace GepardOOD.Services.Data.Interfaces
 		Task<IEnumerable<BeerSelectCategoryFormModel>> AllCategoriesAsync();
 
 		Task<bool> ExistsByIdAsync(int id);
+
+		Task<IEnumerable<string>> AllCategoryNamesAsync();
 	}
 }

@@ -3363,6 +3363,7 @@
           "GepardOOD.Common": "1.0.0",
           "GepardOOD.Data": "1.0.0",
           "GepardOOD.Data.Models": "1.0.0",
+          "GepardOOD.Services.Data.Models": "1.0.0",
           "GepardOOD.Web.ViewModels": "1.0.0"
         },
         "compile": {
@@ -3370,6 +3371,19 @@
         },
         "runtime": {
           "bin/placeholder/GepardOOD.Services.Data.dll": {}
+        }
+      },
+      "GepardOOD.Services.Data.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "GepardOOD.Web.ViewModels": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/GepardOOD.Services.Data.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GepardOOD.Services.Data.Models.dll": {}
         }
       },
       "GepardOOD.Web.ViewModels/1.0.0": {
@@ -9258,6 +9272,11 @@
       "type": "project",
       "path": "../GepardOOD.Services.Data/GepardOOD.Services.Data.csproj",
       "msbuildProject": "../GepardOOD.Services.Data/GepardOOD.Services.Data.csproj"
+    },
+    "GepardOOD.Services.Data.Models/1.0.0": {
+      "type": "project",
+      "path": "../GepardOOD.Services.Data.Models/GepardOOD.Services.Data.Models.csproj",
+      "msbuildProject": "../GepardOOD.Services.Data.Models/GepardOOD.Services.Data.Models.csproj"
     },
     "GepardOOD.Web.ViewModels/1.0.0": {
       "type": "project",

@@ -11,6 +11,7 @@
           "GepardOOD.Common": "1.0.0",
           "GepardOOD.Data": "1.0.0",
           "GepardOOD.Data.Models": "1.0.0",
+          "GepardOOD.Services.Data.Models": "1.0.0",
           "GepardOOD.Web.ViewModels": "1.0.0"
         },
         "runtime": {
@@ -547,6 +548,14 @@
           "GepardOOD.Data.Models.dll": {}
         }
       },
+      "GepardOOD.Services.Data.Models/1.0.0": {
+        "dependencies": {
+          "GepardOOD.Web.ViewModels": "1.0.0"
+        },
+        "runtime": {
+          "GepardOOD.Services.Data.Models.dll": {}
+        }
+      },
       "GepardOOD.Web.ViewModels/1.0.0": {
         "dependencies": {
           "GepardOOD.Common": "1.0.0"
@@ -889,6 +898,11 @@
       "sha512": ""
     },
     "GepardOOD.Data.Models/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GepardOOD.Services.Data.Models/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -5,23 +5,25 @@ VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GepardOOD.Web", "GepardOOD.Web.csproj", "{88CC27E5-B8CF-4DE0-A4AF-7FB56DB50985}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GepardOOD.Common", "..\GepardOOD.Common\GepardOOD.Common.csproj", "{2480DE37-1FB8-471C-AF09-BC558980A991}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GepardOOD.Common", "..\GepardOOD.Common\GepardOOD.Common.csproj", "{2480DE37-1FB8-471C-AF09-BC558980A991}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{598FA8FB-F2E5-4FED-BBB9-97C8983403BA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{595620FC-48A0-40AA-BE34-1C611660F708}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GepardOOD.Data", "..\GepardOOD.Data\GepardOOD.Data.csproj", "{081F3C49-1611-4A16-A6FA-3785B95E854A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GepardOOD.Data", "..\GepardOOD.Data\GepardOOD.Data.csproj", "{081F3C49-1611-4A16-A6FA-3785B95E854A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GepardOOD.Data.Models", "..\GepardOOD.Data.Models\GepardOOD.Data.Models.csproj", "{CBE2526F-76AB-4B52-A52F-78DE55F3B09E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GepardOOD.Data.Models", "..\GepardOOD.Data.Models\GepardOOD.Data.Models.csproj", "{CBE2526F-76AB-4B52-A52F-78DE55F3B09E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GepardOOD.Web.ViewModels", "..\GepardOOD.Web.ViewModels\GepardOOD.Web.ViewModels.csproj", "{08ECA44B-76BA-4B0B-A382-21213F047552}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GepardOOD.Web.ViewModels", "..\GepardOOD.Web.ViewModels\GepardOOD.Web.ViewModels.csproj", "{08ECA44B-76BA-4B0B-A382-21213F047552}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{03A29B25-46C0-459B-BF54-6DE3B6EE2BEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GepardOOD.Services.Data", "..\GepardOOD.Services.Data\GepardOOD.Services.Data.csproj", "{4DAFEF62-40E7-4CD8-A2C6-5003F6FD963E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GepardOOD.Services.Data", "..\GepardOOD.Services.Data\GepardOOD.Services.Data.csproj", "{4DAFEF62-40E7-4CD8-A2C6-5003F6FD963E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GepardOOD.Web.Infrastructure", "..\GepardOOD.Web.Infrastructure\GepardOOD.Web.Infrastructure.csproj", "{01853784-898B-4767-A0DD-05E90A70AFF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GepardOOD.Web.Infrastructure", "..\GepardOOD.Web.Infrastructure\GepardOOD.Web.Infrastructure.csproj", "{01853784-898B-4767-A0DD-05E90A70AFF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GepardOOD.Services.Data.Models", "..\GepardOOD.Services.Data.Models\GepardOOD.Services.Data.Models.csproj", "{357FF9FB-22EC-44A7-9108-942BF77B30CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{01853784-898B-4767-A0DD-05E90A70AFF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01853784-898B-4767-A0DD-05E90A70AFF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01853784-898B-4767-A0DD-05E90A70AFF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{357FF9FB-22EC-44A7-9108-942BF77B30CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{357FF9FB-22EC-44A7-9108-942BF77B30CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{357FF9FB-22EC-44A7-9108-942BF77B30CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{357FF9FB-22EC-44A7-9108-942BF77B30CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +74,7 @@ Global
 		{08ECA44B-76BA-4B0B-A382-21213F047552} = {598FA8FB-F2E5-4FED-BBB9-97C8983403BA}
 		{4DAFEF62-40E7-4CD8-A2C6-5003F6FD963E} = {03A29B25-46C0-459B-BF54-6DE3B6EE2BEB}
 		{01853784-898B-4767-A0DD-05E90A70AFF6} = {598FA8FB-F2E5-4FED-BBB9-97C8983403BA}
+		{357FF9FB-22EC-44A7-9108-942BF77B30CF} = {03A29B25-46C0-459B-BF54-6DE3B6EE2BEB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FCC4EEB0-8C04-4009-8B88-AC4E3B494480}

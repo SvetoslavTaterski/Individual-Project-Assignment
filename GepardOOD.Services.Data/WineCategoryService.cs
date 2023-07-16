@@ -29,6 +29,16 @@ namespace GepardOOD.Services.Data
 			return wineCategories;
 		}
 
+		public async Task<IEnumerable<string>> AllCategoryNamesAsync()
+		{
+			IEnumerable<string> allNames = await _data
+				.WineCategories
+				.Select(c => c.Name)
+				.ToArrayAsync();
+
+			return allNames;
+		}
+
 		public async Task<bool> ExistsByIdAsync(int id)
 		{
 			bool result = await _data

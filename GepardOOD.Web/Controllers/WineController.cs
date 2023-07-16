@@ -4,11 +4,13 @@ using GepardOOD.Web.ViewModels.Wine;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
 using GepardOOD.Web.Infrastructure.Extensions;
+using GepardOOD.Services.Data.Models.Wine;
 
 namespace GepardOOD.Web.Controllers
 {
-    [Authorize]
+	[Authorize]
 	public class WineController : Controller
 	{
 		private readonly IWineCategoryService _wineCategoryService;
@@ -24,9 +26,16 @@ namespace GepardOOD.Web.Controllers
 		}
 
 		[AllowAnonymous]
-		public async Task<IActionResult> All()
+		public async Task<IActionResult> All([FromQuery] AllWineQueryModel queryModel)
 		{
-			return Ok();
+			AllWineFilteredAndPagedServiceModel serviceModel =
+				await _wineService.AllAsync(queryModel);
+
+			queryModel.Wines = serviceModel.Wines;
+			queryModel.TotalWines = serviceModel.TotalWinesCount;
+			queryModel.Categories = await _wineCategoryService.AllCategoryNamesAsync();
+
+			return View(queryModel);
 		}
 
 		[HttpGet]

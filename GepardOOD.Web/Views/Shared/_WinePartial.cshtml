@@ -1,0 +1,37 @@
+﻿@using GepardOOD.Web.Infrastructure.Extensions
+@using GepardOOD.Services.Data.Interfaces
+@model WineAllViewModel
+
+@inject IAssociateService AssociateService
+@inject IWineService WineService
+@{
+	bool isUserAssociate = await AssociateService.AssociateExistByUserIdAsync(this.User.GetId()!);
+}
+
+<div class="col-md-4">
+	<div class="card mb-3">
+		<img class="card-img-top" src="@Model.ImageUrl" alt="Wine Image">
+		<div class="card-body text-center">
+			<h4>@Model.Name</h4>
+			<h6>Manufacturer: <b>@Model.Manufacturer</b></h6>
+			<h6>
+				Price:
+				<b>@($"{Model.Price:f2}") BGN</b>
+			</h6>
+			<br />
+			<a asp-controller="Wine" asp-action="Details" asp-route-id="@Model.Id"
+	  class="btn btn-success">Details</a>
+
+			@if (this.User.Identity?.IsAuthenticated ?? false)
+			{
+
+				<a asp-controller="Wine" asp-action="Edit" asp-route-id="@Model.Id"
+		  class="btn btn-warning">Edit</a>
+				<a asp-controller="Wine" asp-action="Delete" asp-route-id="@Model.Id"
+		  class="btn btn-danger">Delete</a>
+				<p></p>
+			}
+		</div>
+	</div>
+</div>
+

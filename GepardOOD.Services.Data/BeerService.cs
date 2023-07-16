@@ -74,7 +74,8 @@ namespace GepardOOD.Services.Data
 		{
 			IEnumerable<BeerAllViewModel> allAssociateBeers = await this._dbContext
 				.Beers
-				.Where(a => a.AssociateId.ToString() == associateId)
+				.Where(a =>a.IsActive &&
+				           a.AssociateId.ToString() == associateId)
 				.Select(b => new BeerAllViewModel
 				{
 					Id = b.Id,

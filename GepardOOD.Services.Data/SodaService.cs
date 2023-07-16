@@ -69,6 +69,26 @@ namespace GepardOOD.Services.Data
 			};
 		}
 
+		public async Task<IEnumerable<SodaAllViewModel>> AllByAssociateIdAsync(string associateId)
+		{
+			IEnumerable<SodaAllViewModel> allAssociateSodas = await _data
+				.Sodas
+				.Where(a => a.IsActive &&
+							a.AssociateId.ToString() == associateId)
+				.Select(b => new SodaAllViewModel()
+				{
+					Id = b.Id,
+					Name = b.Name,
+					Manufacturer = b.Manufacturer,
+					Description = b.Description,
+					ImageUrl = b.ImageUrl,
+					Price = b.Price
+				})
+				.ToArrayAsync();
+
+			return allAssociateSodas;
+		}
+
 		public async Task CreateAsync(SodaFormModel model, string associateId)
 		{
 			Soda newSoda = new Soda()

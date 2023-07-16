@@ -1,0 +1,21 @@
+﻿@model List<SodaAllViewModel>
+@{
+	ViewData["Title"] = "My added Sodas";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+@if (!Model.Any())
+{
+	<h2 class="text-center">You do not have any added Sodas yet!</h2>
+}
+else
+{
+	<div class="row">
+		@foreach (SodaAllViewModel soda in Model)
+		{
+			<partial name="_SodaPartial" model="soda" />
+		}
+	</div>
+}

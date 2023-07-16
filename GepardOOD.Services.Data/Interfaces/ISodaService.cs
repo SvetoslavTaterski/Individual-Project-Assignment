@@ -1,4 +1,5 @@
 ﻿using GepardOOD.Services.Data.Models.Soda;
+
 using GepardOOD.Web.ViewModels.Soda;
 
 
@@ -9,5 +10,7 @@ namespace GepardOOD.Services.Data.Interfaces
 		Task CreateAsync(SodaFormModel model, string associateId);
 
 		Task<AllSodasFilteredAndPagedServiceModel> AllAsync(AllSodaQueryModel sodaModel);
+
+		Task<IEnumerable<SodaAllViewModel>> AllByAssociateIdAsync(string associateId);
 	}
 }

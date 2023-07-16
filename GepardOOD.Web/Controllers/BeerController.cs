@@ -102,5 +102,30 @@ namespace GepardOOD.Web.Controllers
 
 			return RedirectToAction("All", "Beer");
 		}
+
+		[HttpGet]
+		public async Task<IActionResult> Mine()
+		{
+			List<BeerAllViewModel> myBeers = new List<BeerAllViewModel>();
+
+			string userId = User.GetId()!;
+
+			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(userId);
+
+			if (isUserAssociate)
+			{
+				string? associateId = await _associateService.GetAssociateIdByUserIdAsync(userId);
+
+				myBeers.AddRange(await _beerService.AllByAssociateIdAsync(associateId!));
+			}
+			else
+			{
+				TempData[ErrorMessage] = "You must become an associate in order to have added beers!";
+
+				return RedirectToAction("Become", "Associate");
+			}
+
+			return View(myBeers);
+		}
 	}
 }

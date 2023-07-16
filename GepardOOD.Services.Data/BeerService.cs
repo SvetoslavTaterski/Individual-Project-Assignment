@@ -70,6 +70,25 @@ namespace GepardOOD.Services.Data
 			};
 		}
 
+		public async Task<IEnumerable<BeerAllViewModel>> AllByAssociateIdAsync(string associateId)
+		{
+			IEnumerable<BeerAllViewModel> allAssociateBeers = await this._dbContext
+				.Beers
+				.Where(a => a.AssociateId.ToString() == associateId)
+				.Select(b => new BeerAllViewModel
+				{
+					Id = b.Id,
+					Name = b.Name,
+					Manufacturer = b.Manufacturer,
+					Description = b.Description,
+					ImageUrl = b.ImageUrl,
+					Price = b.Price
+				})
+				.ToArrayAsync();
+
+			return allAssociateBeers;
+		}
+
 		public async Task CreateAsync(BeerFormModel model, string associateId)
 		{
 			Beer newBeer = new Beer()

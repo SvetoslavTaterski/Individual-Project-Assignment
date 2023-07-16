@@ -1,0 +1,21 @@
+﻿@model List<BeerAllViewModel>
+@{
+	ViewData["Title"] = "My added Beers";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr/>
+
+@if (!Model.Any())
+{
+	<h2 class="text-center">You do not have any added Beers yet!</h2>
+}
+else
+{
+	<div class="row">
+		@foreach (BeerAllViewModel beer in Model)
+		{
+			<partial name="_BeerPartial" model="beer"/>
+		}
+	</div>
+}

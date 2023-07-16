@@ -1,12 +1,11 @@
 ﻿using GepardOOD.Services.Data.Interfaces;
 using GepardOOD.Web.ViewModels.Whiskey;
 using static GepardOOD.Common.NotificationMessagesConstants;
+using GepardOOD.Web.Infrastructure.Extensions;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using GepardOOD.Services.Data;
-using GepardOOD.Web.ViewModels.Wine;
-using GepardOOD.Web.Infrastructure.Extensions;
+using GepardOOD.Services.Data.Models.Whiskey;
 
 namespace GepardOOD.Web.Controllers
 {
@@ -26,9 +25,16 @@ namespace GepardOOD.Web.Controllers
 		}
 
 		[AllowAnonymous]
-		public async Task<IActionResult> All()
+		public async Task<IActionResult> All([FromQuery] AllWhiskeyQueryModel queryModel)
 		{
-			return Ok();
+			AllWhiskeysFilteredAndPagedServiceModel serviceModel =
+				await _whiskeyService.AllAsync(queryModel);
+
+			queryModel.Whiskeys = serviceModel.Whiskeys;
+			queryModel.TotalWhiskeys = serviceModel.TotalWhiskeysCount;
+			queryModel.Categories = await _whiskeyCategoryService.AllCategoryNamesAsync();
+
+			return View(queryModel);
 		}
 
 		[HttpGet]

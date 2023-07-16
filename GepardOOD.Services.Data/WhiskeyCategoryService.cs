@@ -2,6 +2,7 @@
 using GepardOOD.Web.Data;
 using GepardOOD.Web.ViewModels.Category;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 
 namespace GepardOOD.Services.Data
 {
@@ -26,6 +27,16 @@ namespace GepardOOD.Services.Data
 				.ToArrayAsync();
 
 			return whiskeyCategories;
+		}
+
+		public async Task<IEnumerable<string>> AllCategoryNamesAsync()
+		{
+			IEnumerable<string> allNames = await _dbContext
+				.WhiskeyCategories
+				.Select(c => c.Name)
+				.ToArrayAsync();
+
+			return allNames;
 		}
 
 		public async Task<bool> ExistsByIdAsync(int id)

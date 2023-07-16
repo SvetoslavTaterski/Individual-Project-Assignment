@@ -1,6 +1,6 @@
 ﻿using GepardOOD.Services.Data.Models.Whiskey;
-
 using GepardOOD.Web.ViewModels.Whiskey;
+
 
 namespace GepardOOD.Services.Data.Interfaces
 {
@@ -9,5 +9,7 @@ namespace GepardOOD.Services.Data.Interfaces
 		Task CreateAsync(WhiskeyFormModel model, string associateId);
 
 		Task<AllWhiskeysFilteredAndPagedServiceModel> AllAsync(AllWhiskeyQueryModel whiskeyModel);
+
+		Task<IEnumerable<WhiskeyAllViewModel>> AllByAssociateIdAsync(string associateId);
 	}
 }

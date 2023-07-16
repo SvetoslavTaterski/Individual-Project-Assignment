@@ -1,12 +1,10 @@
 ﻿using GepardOOD.Data.Models;
 using GepardOOD.Services.Data.Interfaces;
-using GepardOOD.Services.Data.Models.Soda;
 using GepardOOD.Services.Data.Models.Whiskey;
 using GepardOOD.Web.Data;
-using GepardOOD.Web.ViewModels.Soda;
-using GepardOOD.Web.ViewModels.Soda.Enums;
 using GepardOOD.Web.ViewModels.Whiskey;
 using GepardOOD.Web.ViewModels.Whiskey.Enums;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace GepardOOD.Services.Data
@@ -70,6 +68,26 @@ namespace GepardOOD.Services.Data
 				TotalWhiskeysCount = totalWhiskeys,
 				Whiskeys = allWhiskeys
 			};
+		}
+
+		public async Task<IEnumerable<WhiskeyAllViewModel>> AllByAssociateIdAsync(string associateId)
+		{
+			IEnumerable<WhiskeyAllViewModel> allAssociateWhiskeys = await _data
+				.Whiskeys
+				.Where(a => a.IsActive &&
+				            a.AssociateId.ToString() == associateId)
+				.Select(b => new WhiskeyAllViewModel()
+				{
+					Id = b.Id,
+					Name = b.Name,
+					Manufacturer = b.Manufacturer,
+					Description = b.Description,
+					ImageUrl = b.ImageUrl,
+					Price = b.Price
+				})
+				.ToArrayAsync();
+
+			return allAssociateWhiskeys;
 		}
 
 		public async Task CreateAsync(WhiskeyFormModel model, string associateId)

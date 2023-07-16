@@ -1,12 +1,14 @@
 ﻿using GepardOOD.Services.Data.Interfaces;
+using GepardOOD.Services.Data.Models.Soda;
 using GepardOOD.Web.ViewModels.Soda;
-using GepardOOD.Web.ViewModels.Wine;
+
 using static GepardOOD.Common.NotificationMessagesConstants;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using GepardOOD.Services.Data;
+
 using GepardOOD.Web.Infrastructure.Extensions;
+using GepardOOD.Services.Data;
 
 namespace GepardOOD.Web.Controllers
 {
@@ -26,9 +28,16 @@ namespace GepardOOD.Web.Controllers
 		}
 
 		[AllowAnonymous]
-		public async Task<IActionResult> All()
+		public async Task<IActionResult> All([FromQuery] AllSodaQueryModel queryModel)
 		{
-			return Ok();
+			AllSodasFilteredAndPagedServiceModel serviceModel =
+				await _sodaService.AllAsync(queryModel);
+
+			queryModel.Sodas = serviceModel.Sodas;
+			queryModel.TotalSodas = serviceModel.TotalSodasCount;
+			queryModel.Categories = await _sodaCategoryService.AllCategoryNamesAsync();
+
+			return View(queryModel);
 		}
 
 		[HttpGet]

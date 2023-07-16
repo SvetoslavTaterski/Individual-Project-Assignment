@@ -45,7 +45,9 @@ namespace GepardOOD.Services.Data
 			};
 
 			IEnumerable<SodaAllViewModel> allSodas =
-				await sodaQuery.Skip((sodaModel.CurrentPage - 1) * sodaModel.SodasPerPage)
+				await sodaQuery
+					.Where(s => s.IsActive)
+					.Skip((sodaModel.CurrentPage - 1) * sodaModel.SodasPerPage)
 					.Take(sodaModel.SodasPerPage)
 					.Select(s => new SodaAllViewModel()
 					{

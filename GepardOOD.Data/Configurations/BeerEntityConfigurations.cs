@@ -13,6 +13,9 @@ namespace GepardOOD.Data.Configurations
                 .HasForeignKey(c => c.BeerCategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder.Property(b => b.IsActive)
+	            .HasDefaultValue(true);
+
             builder.HasOne(b => b.Associate)
                 .WithMany(a => a.Beers)
                 .HasForeignKey(b => b.AssociateId)

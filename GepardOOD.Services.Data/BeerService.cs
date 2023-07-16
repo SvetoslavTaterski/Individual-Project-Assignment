@@ -46,7 +46,9 @@ namespace GepardOOD.Services.Data
 			};
 
 			IEnumerable<BeerAllViewModel> allBeers =
-				await beerQuery.Skip((beerModel.CurrentPage - 1) * beerModel.BeersPerPage)
+				await beerQuery
+					.Where(b => b.IsActive)
+					.Skip((beerModel.CurrentPage - 1) * beerModel.BeersPerPage)
 					.Take(beerModel.BeersPerPage)
 					.Select(b => new BeerAllViewModel
 					{
@@ -89,6 +91,7 @@ namespace GepardOOD.Services.Data
 		{
 			IEnumerable<IndexViewModel> threeBeers = await _dbContext
 				.Beers
+				.Where(b => b.IsActive)
 				.OrderByDescending(b => b.Id)
 				.Take(3)
 				.Select(b => new IndexViewModel()

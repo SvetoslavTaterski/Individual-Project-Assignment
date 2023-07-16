@@ -48,7 +48,9 @@ namespace GepardOOD.Services.Data
 			};
 
 			IEnumerable<WhiskeyAllViewModel> allWhiskeys =
-				await whiskeyQuery.Skip((whiskeyModel.CurrentPage - 1) * whiskeyModel.WhiskeysPerPage)
+				await whiskeyQuery
+					.Where(b => b.IsActive)
+					.Skip((whiskeyModel.CurrentPage - 1) * whiskeyModel.WhiskeysPerPage)
 					.Take(whiskeyModel.WhiskeysPerPage)
 					.Select(w => new WhiskeyAllViewModel()
 					{

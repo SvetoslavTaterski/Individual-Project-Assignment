@@ -48,7 +48,9 @@ namespace GepardOOD.Services.Data
 			};
 
 			IEnumerable<WineAllViewModel> allWines =
-				await wineQuery.Skip((wineModel.CurrentPage - 1) * wineModel.WinesPerPage)
+				await wineQuery
+					.Where(b => b.IsActive)
+					.Skip((wineModel.CurrentPage - 1) * wineModel.WinesPerPage)
 					.Take(wineModel.WinesPerPage)
 					.Select(w => new WineAllViewModel()
 					{

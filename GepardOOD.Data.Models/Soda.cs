@@ -27,7 +27,9 @@ namespace GepardOOD.Data.Models
 
         public decimal Price { get; set; }
 
-        [ForeignKey(nameof(SodaCategory))]
+        public bool IsActive { get; set; }
+
+		[ForeignKey(nameof(SodaCategory))]
         public int SodaCategoryId { get; set; }
 
         [Required]

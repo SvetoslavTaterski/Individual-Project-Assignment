@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 using GepardOOD.Web.Infrastructure.Extensions;
 using GepardOOD.Services.Data.Models.Wine;
+using GepardOOD.Services.Data;
+using GepardOOD.Web.ViewModels.Soda;
 
 namespace GepardOOD.Web.Controllers
 {
@@ -99,6 +101,31 @@ namespace GepardOOD.Web.Controllers
 			}
 
 			return RedirectToAction("All", "Wine");
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Mine()
+		{
+			List<WineAllViewModel> myWines = new List<WineAllViewModel>();
+
+			string userId = User.GetId()!;
+
+			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(userId);
+
+			if (isUserAssociate)
+			{
+				string? associateId = await _associateService.GetAssociateIdByUserIdAsync(userId);
+
+				myWines.AddRange(await _wineService.AllByAssociateIdAsync(associateId!));
+			}
+			else
+			{
+				TempData[ErrorMessage] = "You must become an associate in order to have added wines!";
+
+				return RedirectToAction("Become", "Associate");
+			}
+
+			return View(myWines);
 		}
 	}
 }

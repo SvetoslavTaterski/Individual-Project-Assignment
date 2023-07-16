@@ -8,5 +8,7 @@ namespace GepardOOD.Services.Data.Interfaces
 		Task CreateAsync(WineFormModel model, string associateId);
 
 		Task<AllWineFilteredAndPagedServiceModel> AllAsync(AllWineQueryModel wineModel);
+
+		Task<IEnumerable<WineAllViewModel>> AllByAssociateIdAsync(string associateId);
 	}
 }

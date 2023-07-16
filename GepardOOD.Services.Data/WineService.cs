@@ -72,6 +72,26 @@ namespace GepardOOD.Services.Data
 			};
 		}
 
+		public async Task<IEnumerable<WineAllViewModel>> AllByAssociateIdAsync(string associateId)
+		{
+			IEnumerable<WineAllViewModel> allAssociateWines = await _data
+				.Wines
+				.Where(a => a.IsActive &&
+				            a.AssociateId.ToString() == associateId)
+				.Select(b => new WineAllViewModel()
+				{
+					Id = b.Id,
+					Name = b.Name,
+					Manufacturer = b.Manufacturer,
+					Description = b.Description,
+					ImageUrl = b.ImageUrl,
+					Price = b.Price
+				})
+				.ToArrayAsync();
+
+			return allAssociateWines;
+		}
+
 		public async Task CreateAsync(WineFormModel model, string associateId)
 		{
 			Wine newWine = new Wine()

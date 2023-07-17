@@ -2,12 +2,12 @@
 using GepardOOD.Web.ViewModels.Whiskey;
 using static GepardOOD.Common.NotificationMessagesConstants;
 using GepardOOD.Web.Infrastructure.Extensions;
+using GepardOOD.Services.Data.Models.Whiskey;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using GepardOOD.Services.Data.Models.Whiskey;
 using GepardOOD.Services.Data;
-using GepardOOD.Web.ViewModels.Wine;
+
 
 namespace GepardOOD.Web.Controllers
 {
@@ -125,6 +125,22 @@ namespace GepardOOD.Web.Controllers
 			}
 
 			return View(myWhiskeys);
+		}
+
+		[HttpGet]
+		[AllowAnonymous]
+		public async Task<IActionResult> Details(int id)
+		{
+			WhiskeyDetailsViewModel? viewModel = await _whiskeyService.GetDetailsByIdAsync(id);
+
+			if (viewModel == null)
+			{
+				TempData[ErrorMessage] = "Whiskey with the provided Id does not exist!";
+
+				return RedirectToAction("All", "Whiskey");
+			}
+
+			return View(viewModel);
 		}
 	}
 }

@@ -2,10 +2,13 @@
 using GepardOOD.Services.Data.Interfaces;
 using GepardOOD.Services.Data.Models.Whiskey;
 using GepardOOD.Web.Data;
+using GepardOOD.Web.ViewModels.Associate;
 using GepardOOD.Web.ViewModels.Whiskey;
 using GepardOOD.Web.ViewModels.Whiskey.Enums;
 
 using Microsoft.EntityFrameworkCore;
+using static GepardOOD.Common.EntityValidationConstants;
+using Whiskey = GepardOOD.Data.Models.Whiskey;
 
 namespace GepardOOD.Services.Data
 {
@@ -105,6 +108,38 @@ namespace GepardOOD.Services.Data
 
 			await _data.Whiskeys.AddAsync(newWhiskey);
 			await _data.SaveChangesAsync();
+		}
+
+		public async Task<WhiskeyDetailsViewModel?> GetDetailsByIdAsync(int whiskeyId)
+		{
+			Whiskey? whiskey = await _data
+				.Whiskeys
+				.Include(b => b.WhiskeyCategory)
+			    .Include(b => b.Associate)
+				.ThenInclude(a => a.User)
+				.Where(b => b.IsActive)
+				.FirstOrDefaultAsync(b => b.Id == whiskeyId);
+
+			if (whiskey == null)
+			{
+				return null;
+			}
+
+			return new WhiskeyDetailsViewModel()
+			{
+				Id = whiskey.Id,
+				Name = whiskey.Name,
+				Manufacturer = whiskey.Manufacturer,
+				Description = whiskey.Description,
+				ImageUrl = whiskey.ImageUrl,
+				Price = whiskey.Price,
+				Category = whiskey.WhiskeyCategory.Name,
+				AssociateInfo = new AssociateInfo()
+				{
+					Email = whiskey.Associate.User.Email,
+					PhoneNumber = whiskey.Associate.PhoneNumber
+				}
+			};
 		}
 	}
 }

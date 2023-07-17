@@ -11,5 +11,7 @@ namespace GepardOOD.Services.Data.Interfaces
 		Task<AllWhiskeysFilteredAndPagedServiceModel> AllAsync(AllWhiskeyQueryModel whiskeyModel);
 
 		Task<IEnumerable<WhiskeyAllViewModel>> AllByAssociateIdAsync(string associateId);
+
+		Task<WhiskeyDetailsViewModel?> GetDetailsByIdAsync(int whiskeyId);
 	}
 }

@@ -1,0 +1,62 @@
+﻿@using GepardOOD.Web.Infrastructure.Extensions
+@using GepardOOD.Services.Data.Interfaces
+@model BeerDetailsViewModel
+
+@inject IAssociateService AssociateService
+
+@inject IBeerService BeerService
+@{
+	bool isUserAssociate = await AssociateService.AssociateExistByUserIdAsync(User.GetId()!);
+}
+
+@{
+	ViewBag.Title = "Beer Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container" style="display:inline">
+	<div class="row">
+		<div class="col-4">
+			<img class="card-img-top" style="width: 20rem;"
+				 src="@Model.ImageUrl" alt="Beer Image">
+		</div>
+		<div class="card col-8 border-0">
+			<p style="font-size:25px;"><u>@Model.Name</u></p>
+			<p>Located in: <b>@Model.Manufacturer</b></p>
+			<p>
+				Price Per Month:
+				<b>@($"{Model.Price:f2}") BGN</b>
+			</p>
+			<p>@Model.Description</p>
+			<p>Category: <b>@Model.Category</b></p>
+			<div class="form-inline">
+				@if (this.User.Identity?.IsAuthenticated ?? false)
+				{
+
+					<a class="btn btn-warning" asp-controller="Beer" asp-action="Edit"
+				   asp-route-id="@Model.Id">Edit</a>
+					<a class="ml-2 btn btn-danger" asp-controller="Beer" asp-action="Delete"
+				   asp-route-id="@Model.Id">Delete</a>
+
+					@if (!isUserAssociate)
+					{
+						<form class="ml-2" asp-controller="Beer"
+					  asp-action="Buy" asp-route-id="@Model.Id" method="post">
+							<input class="btn btn-primary" type="submit" value="Buy" />
+						</form>
+					}
+				}
+			</div>
+			<p></p>
+			<div class="card" style="width: 18rem;">
+				<div class="card-body">
+					<h5 class="card-title">Associate Info</h5>
+					<p class="card-text">Email:  @Model.AssociateInfo.Email</p>
+					<p class="card-text">Phone Number: @Model.AssociateInfo.PhoneNumber</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

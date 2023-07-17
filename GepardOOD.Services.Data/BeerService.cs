@@ -2,6 +2,7 @@
 using GepardOOD.Services.Data.Interfaces;
 using GepardOOD.Services.Data.Models.Beer;
 using GepardOOD.Web.Data;
+using GepardOOD.Web.ViewModels.Associate;
 using GepardOOD.Web.ViewModels.Beer;
 using GepardOOD.Web.ViewModels.Beer.Enums;
 using GepardOOD.Web.ViewModels.Home;
@@ -105,6 +106,38 @@ namespace GepardOOD.Services.Data
 
 			await _dbContext.Beers.AddAsync(newBeer);
 			await _dbContext.SaveChangesAsync();
+		}
+
+		public async Task<BeerDetailsViewModel?> GetDetailsByIdAsync(int beerId)
+		{
+			Beer? beer = await _dbContext
+				.Beers
+				.Include(b => b.BeerCategory)
+				.Include(b => b.Associate)
+				.ThenInclude(a => a.User)
+				.Where(b => b.IsActive)
+				.FirstOrDefaultAsync(b => b.Id == beerId);
+
+			if (beer == null)
+			{
+				return null;
+			}
+
+			return new BeerDetailsViewModel
+			{
+				Id = beer.Id,
+				Name = beer.Name,
+				Manufacturer = beer.Manufacturer,
+				Description = beer.Description,
+				ImageUrl = beer.ImageUrl,
+				Price = beer.Price,
+				Category = beer.BeerCategory.Name,
+				AssociateInfo = new AssociateInfo()
+				{
+					Email = beer.Associate.User.Email,
+					PhoneNumber = beer.Associate.PhoneNumber
+				}
+			};
 		}
 
 		public async Task<IEnumerable<IndexViewModel>> ThreeBeersAsync()

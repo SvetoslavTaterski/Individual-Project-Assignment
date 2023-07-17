@@ -1,11 +1,11 @@
 ﻿using GepardOOD.Services.Data.Interfaces;
 using GepardOOD.Services.Data.Models.Beer;
 using GepardOOD.Web.ViewModels.Beer;
+using GepardOOD.Web.Infrastructure.Extensions;
 using static GepardOOD.Common.NotificationMessagesConstants;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using GepardOOD.Web.Infrastructure.Extensions;
 
 namespace GepardOOD.Web.Controllers
 {
@@ -126,6 +126,22 @@ namespace GepardOOD.Web.Controllers
 			}
 
 			return View(myBeers);
+		}
+
+		[HttpGet]
+		[AllowAnonymous]
+		public async Task<IActionResult> Details(int id)
+		{
+			BeerDetailsViewModel? viewModel = await _beerService.GetDetailsByIdAsync(id);
+
+			if (viewModel == null)
+			{
+				TempData[ErrorMessage] = "Beer with the provided Id does not exist!";
+
+				return RedirectToAction("All", "Beer");
+			}
+
+			return View(viewModel);
 		}
 	}
 }

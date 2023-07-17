@@ -2,6 +2,7 @@
 using GepardOOD.Services.Data.Interfaces;
 using GepardOOD.Services.Data.Models.Soda;
 using GepardOOD.Web.Data;
+using GepardOOD.Web.ViewModels.Associate;
 using GepardOOD.Web.ViewModels.Soda;
 using GepardOOD.Web.ViewModels.Soda.Enums;
 using Microsoft.EntityFrameworkCore;
@@ -104,6 +105,38 @@ namespace GepardOOD.Services.Data
 
 			await _data.Sodas.AddAsync(newSoda);
 			await _data.SaveChangesAsync();
+		}
+
+		public async Task<SodaDetailsViewModel?> GetDetailsByIdAsync(int sodaId)
+		{
+			Soda? soda = await _data
+				.Sodas
+				.Include(b => b.SodaCategory)
+				.Include(b => b.Associate)
+				.ThenInclude(a => a.User)
+				.Where(b => b.IsActive)
+				.FirstOrDefaultAsync(b => b.Id == sodaId);
+
+			if (soda == null)
+			{
+				return null;
+			}
+
+			return new SodaDetailsViewModel()
+			{
+				Id = soda.Id,
+				Name = soda.Name,
+				Manufacturer = soda.Manufacturer,
+				Description = soda.Description,
+				ImageUrl = soda.ImageUrl,
+				Price = soda.Price,
+				Category = soda.SodaCategory.Name,
+				AssociateInfo = new AssociateInfo()
+				{
+					Email = soda.Associate.User.Email,
+					PhoneNumber = soda.Associate.PhoneNumber
+				}
+			};
 		}
 	}
 }

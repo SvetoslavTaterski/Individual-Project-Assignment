@@ -1,12 +1,11 @@
-﻿using GepardOOD.Data.Models;
-using GepardOOD.Services.Data.Interfaces;
-using GepardOOD.Services.Data.Models.Soda;
+﻿using GepardOOD.Services.Data.Interfaces;
 using GepardOOD.Services.Data.Models.Wine;
 using GepardOOD.Web.Data;
-using GepardOOD.Web.ViewModels.Soda;
-using GepardOOD.Web.ViewModels.Soda.Enums;
+using GepardOOD.Web.ViewModels.Associate;
 using GepardOOD.Web.ViewModels.Wine;
 using GepardOOD.Web.ViewModels.Wine.Enums;
+using Wine = GepardOOD.Data.Models.Wine;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace GepardOOD.Services.Data
@@ -35,8 +34,8 @@ namespace GepardOOD.Services.Data
 
 				wineQuery = wineQuery
 					.Where(s => EF.Functions.Like(s.Name, wildCard) ||
-					            EF.Functions.Like(s.Manufacturer, wildCard) ||
-					            EF.Functions.Like(s.Description, wildCard));
+								EF.Functions.Like(s.Manufacturer, wildCard) ||
+								EF.Functions.Like(s.Description, wildCard));
 			}
 
 			wineQuery = wineModel.WineSorting switch
@@ -77,7 +76,7 @@ namespace GepardOOD.Services.Data
 			IEnumerable<WineAllViewModel> allAssociateWines = await _data
 				.Wines
 				.Where(a => a.IsActive &&
-				            a.AssociateId.ToString() == associateId)
+							a.AssociateId.ToString() == associateId)
 				.Select(b => new WineAllViewModel()
 				{
 					Id = b.Id,
@@ -107,6 +106,38 @@ namespace GepardOOD.Services.Data
 
 			await _data.Wines.AddAsync(newWine);
 			await _data.SaveChangesAsync();
+		}
+
+		public async Task<WineDetailsViewModel?> GetDetailsByIdAsync(int wineId)
+		{
+			Wine? wine = await _data
+				.Wines
+				.Include(b => b.WineCategory)
+			    .Include(b => b.Associate)
+				.ThenInclude(a => a.User)
+				.Where(b => b.IsActive)
+				.FirstOrDefaultAsync(b => b.Id == wineId);
+
+			if (wine == null)
+			{
+				return null;
+			}
+
+			return new WineDetailsViewModel()
+			{
+				Id = wine.Id,
+				Name = wine.Name,
+				Manufacturer = wine.Manufacturer,
+				Description = wine.Description,
+				ImageUrl = wine.ImageUrl,
+				Price = wine.Price,
+				Category = wine.WineCategory.Name,
+				AssociateInfo = new AssociateInfo()
+				{
+					Email = wine.Associate.User.Email,
+					PhoneNumber = wine.Associate.PhoneNumber
+				}
+			};
 		}
 	}
 }

@@ -1,16 +1,16 @@
 ﻿@using GepardOOD.Web.Infrastructure.Extensions
 @using GepardOOD.Services.Data.Interfaces
-@model BeerDetailsViewModel
+@model WineDetailsViewModel
 
 @inject IAssociateService AssociateService
 
-@inject IBeerService BeerService
+@inject IWineService WineService
 @{
 	bool isUserAssociate = await AssociateService.AssociateExistByUserIdAsync(User.GetId()!);
 }
 
 @{
-	ViewBag.Title = "Beer Details";
+	ViewBag.Title = "Wine Details";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -20,7 +20,7 @@
 	<div class="row">
 		<div class="col-4">
 			<img class="card-img-top" style="width: 20rem;"
-				 src="@Model.ImageUrl" alt="Beer Image">
+				 src="@Model.ImageUrl" alt="Wine Image">
 		</div>
 		<div class="card col-8 border-0">
 			<p style="font-size:25px;"><u>@Model.Name</u></p>
@@ -35,14 +35,14 @@
 				@if (this.User.Identity?.IsAuthenticated ?? false)
 				{
 
-					<a class="btn btn-warning" asp-controller="Beer" asp-action="Edit"
+					<a class="btn btn-warning" asp-controller="Wine" asp-action="Edit"
 				   asp-route-id="@Model.Id">Edit</a>
-					<a class="ml-2 btn btn-danger" asp-controller="Beer" asp-action="Delete"
+					<a class="ml-2 btn btn-danger" asp-controller="Wine" asp-action="Delete"
 				   asp-route-id="@Model.Id">Delete</a>
 
 					@if (!isUserAssociate)
 					{
-						<form class="ml-2" asp-controller="Beer"
+						<form class="ml-2" asp-controller="Wine"
 					  asp-action="Buy" asp-route-id="@Model.Id" method="post">
 							<input class="btn btn-primary" type="submit" value="Buy" />
 						</form>

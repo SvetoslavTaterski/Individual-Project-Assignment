@@ -7,8 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using GepardOOD.Web.Infrastructure.Extensions;
 using GepardOOD.Services.Data.Models.Wine;
-using GepardOOD.Services.Data;
-using GepardOOD.Web.ViewModels.Soda;
+
 
 namespace GepardOOD.Web.Controllers
 {
@@ -126,6 +125,22 @@ namespace GepardOOD.Web.Controllers
 			}
 
 			return View(myWines);
+		}
+
+		[HttpGet]
+		[AllowAnonymous]
+		public async Task<IActionResult> Details(int id)
+		{
+			WineDetailsViewModel? viewModel = await _wineService.GetDetailsByIdAsync(id);
+
+			if (viewModel == null)
+			{
+				TempData[ErrorMessage] = "Wine with the provided Id does not exist!";
+
+				return RedirectToAction("All", "Wine");
+			}
+
+			return View(viewModel);
 		}
 	}
 }

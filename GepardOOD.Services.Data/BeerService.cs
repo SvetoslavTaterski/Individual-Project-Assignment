@@ -108,6 +108,23 @@ namespace GepardOOD.Services.Data
 			await _dbContext.SaveChangesAsync();
 		}
 
+		public async Task EditBeerByIdAndFormModelAsync(int beerId, BeerFormModel model)
+		{
+			Beer beer = await _dbContext
+				.Beers
+				.Where(b => b.IsActive)
+				.FirstAsync(b => b.Id == beerId);
+
+			beer.Name = model.Name;
+			beer.Manufacturer = model.Manufacturer;
+			beer.Description = model.Description;
+			beer.ImageUrl = model.ImageUrl;
+			beer.Price = model.Price;
+			beer.BeerCategoryId = model.CategoryId;
+
+			await _dbContext.SaveChangesAsync();
+		}
+
 		public async Task<bool> ExistsByIdAsync(int beerId)
 		{
 			bool result = await _dbContext
@@ -163,6 +180,16 @@ namespace GepardOOD.Services.Data
 					PhoneNumber = beer.Associate.PhoneNumber
 				}
 			};
+		}
+
+		public async Task<bool> IsAssociateWithIdOwnerOfBeerWithIdAsync(int beerId, string associateId)
+		{
+			Beer beer = await _dbContext
+				.Beers
+				.Where(b => b.IsActive)
+				.FirstAsync(b => b.Id == beerId);
+
+			return beer.AssociateId.ToString() == associateId;
 		}
 
 		public async Task<IEnumerable<IndexViewModel>> ThreeBeersAsync()

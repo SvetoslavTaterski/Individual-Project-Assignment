@@ -53,12 +53,25 @@ namespace GepardOOD.Web.Controllers
 				return RedirectToAction("Become", "Associate");
 			}
 
-			SodaFormModel model = new SodaFormModel()
+			try
 			{
-				SodaCategories = await _sodaCategoryService.AllCategoriesAsync()
-			};
+				SodaFormModel model = new SodaFormModel()
+				{
+					SodaCategories = await _sodaCategoryService.AllCategoriesAsync()
+				};
 
-			return View(model);
+				return View(model);
+			}
+			catch (Exception)
+			{
+				ModelState
+					.AddModelError
+						(string.Empty, "Unexpected error occurred! Please try again later or contact administrator.");
+
+				return RedirectToAction("Index", "Home");
+			}
+
+			
 		}
 
 		[HttpPost]
@@ -113,20 +126,31 @@ namespace GepardOOD.Web.Controllers
 
 			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(userId);
 
-			if (isUserAssociate)
+			try
 			{
-				string? associateId = await _associateService.GetAssociateIdByUserIdAsync(userId);
+				if (isUserAssociate)
+				{
+					string? associateId = await _associateService.GetAssociateIdByUserIdAsync(userId);
 
-				mySodas.AddRange(await _sodaService.AllByAssociateIdAsync(associateId!));
+					mySodas.AddRange(await _sodaService.AllByAssociateIdAsync(associateId!));
+				}
+				else
+				{
+					TempData[ErrorMessage] = "You must become an associate in order to have added sodas!";
+
+					return RedirectToAction("Become", "Associate");
+				}
+
+				return View(mySodas);
 			}
-			else
+			catch (Exception)
 			{
-				TempData[ErrorMessage] = "You must become an associate in order to have added sodas!";
+				ModelState
+					.AddModelError
+						(string.Empty, "Unexpected error occurred! Please try again later or contact administrator.");
 
-				return RedirectToAction("Become", "Associate");
+				return RedirectToAction("Index", "Home");
 			}
-
-			return View(mySodas);
 		}
 
 		[HttpGet]
@@ -142,9 +166,130 @@ namespace GepardOOD.Web.Controllers
 				return RedirectToAction("All", "Soda");
 			}
 
-			SodaDetailsViewModel viewModel = await _sodaService.GetDetailsByIdAsync(id);
+			try
+			{
+				SodaDetailsViewModel viewModel = await _sodaService.GetDetailsByIdAsync(id);
 
-			return View(viewModel);
+				return View(viewModel);
+			}
+			catch (Exception)
+			{
+				ModelState
+					.AddModelError
+						(string.Empty, "Unexpected error occurred! Please try again later or contact administrator.");
+
+				return RedirectToAction("Index", "Home");
+			}
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Edit(int id)
+		{
+			bool sodaExists = await _sodaService.ExistsByIdAsync(id);
+
+			if (!sodaExists)
+			{
+				TempData[ErrorMessage] = "Soda with the provided Id does not exist!";
+
+				return RedirectToAction("All", "Soda");
+			}
+
+			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(User.GetId()!);
+
+			if (!isUserAssociate)
+			{
+				TempData[ErrorMessage] = "You must become an associate in order to edit soda info!";
+
+				return RedirectToAction("Become", "Associate");
+			}
+
+			string? associateId =
+				await _associateService.GetAssociateIdByUserIdAsync(User.GetId()!);
+
+			bool isAssociateOwner = await _sodaService
+				.IsAssociateWithIdOwnerOfSodaWithIdAsync(id, associateId!);
+
+			if (!isAssociateOwner)
+			{
+				TempData[ErrorMessage] = "You must be the owner of the soda in order to edit it!";
+
+				return RedirectToAction("Mine", "Soda");
+			}
+
+			try
+			{
+				SodaFormModel formModel = await _sodaService.GetSodaForEditByIdAsync(id);
+
+				formModel.SodaCategories = await _sodaCategoryService.AllCategoriesAsync();
+
+				return View(formModel);
+			}
+			catch (Exception)
+			{
+				ModelState
+					.AddModelError
+						(string.Empty, "Unexpected error occurred! Please try again later or contact administrator.");
+
+				return RedirectToAction("Index", "Home");
+			}
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(int id, SodaFormModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				model.SodaCategories = await _sodaCategoryService.AllCategoriesAsync();
+				return View(model);
+			}
+
+			bool sodaExists = await _sodaService.ExistsByIdAsync(id);
+
+			if (!sodaExists)
+			{
+				TempData[ErrorMessage] = "Soda with the provided Id does not exist!";
+
+				return RedirectToAction("All", "Soda");
+			}
+
+			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(User.GetId()!);
+
+			if (!isUserAssociate)
+			{
+				TempData[ErrorMessage] = "You must become an associate in order to edit soda info!";
+
+				return RedirectToAction("Become", "Associate");
+			}
+
+			string? associateId =
+				await _associateService.GetAssociateIdByUserIdAsync(User.GetId()!);
+
+			bool isAssociateOwner = await _sodaService
+				.IsAssociateWithIdOwnerOfSodaWithIdAsync(id, associateId!);
+
+			if (!isAssociateOwner)
+			{
+				TempData[ErrorMessage] = "You must be the owner of the soda in order to edit it!";
+
+				return RedirectToAction("Mine", "Soda");
+			}
+
+			try
+			{
+				await _sodaService.EditSodaByIdAndFormModelAsync(id, model);
+			}
+			catch (Exception)
+			{
+				ModelState
+					.AddModelError
+						(string.Empty, "Unexpected error occurred while trying to edit a soda! Please try again later or contact administrator.");
+
+				model.SodaCategories = await _sodaCategoryService.AllCategoriesAsync();
+
+				return View(model);
+			}
+
+			return RedirectToAction("Details", "Soda", new { id });
 		}
 	}
 }

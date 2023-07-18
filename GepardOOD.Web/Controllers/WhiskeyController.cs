@@ -51,12 +51,24 @@ namespace GepardOOD.Web.Controllers
 				return RedirectToAction("Become", "Associate");
 			}
 
-			WhiskeyFormModel model = new WhiskeyFormModel()
+			try
 			{
-				WhiskeyCategories = await _whiskeyCategoryService.AllCategoriesAsync()
-			};
+				WhiskeyFormModel model = new WhiskeyFormModel()
+				{
+					WhiskeyCategories = await _whiskeyCategoryService.AllCategoriesAsync()
+				};
 
-			return View(model);
+				return View(model);
+			}
+			catch (Exception)
+			{
+				ModelState
+					.AddModelError
+						(string.Empty, "Unexpected error occurred! Please try again later or contact administrator.");
+
+				return RedirectToAction("Index", "Home");
+			}
+
 		}
 
 		[HttpPost]
@@ -111,20 +123,31 @@ namespace GepardOOD.Web.Controllers
 
 			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(userId);
 
-			if (isUserAssociate)
+			try
 			{
-				string? associateId = await _associateService.GetAssociateIdByUserIdAsync(userId);
+				if (isUserAssociate)
+				{
+					string? associateId = await _associateService.GetAssociateIdByUserIdAsync(userId);
 
-				myWhiskeys.AddRange(await _whiskeyService.AllByAssociateIdAsync(associateId!));
+					myWhiskeys.AddRange(await _whiskeyService.AllByAssociateIdAsync(associateId!));
+				}
+				else
+				{
+					TempData[ErrorMessage] = "You must become an associate in order to have added whiskeys!";
+
+					return RedirectToAction("Become", "Associate");
+				}
+
+				return View(myWhiskeys);
 			}
-			else
+			catch (Exception)
 			{
-				TempData[ErrorMessage] = "You must become an associate in order to have added whiskeys!";
+				ModelState
+					.AddModelError
+						(string.Empty, "Unexpected error occurred! Please try again later or contact administrator.");
 
-				return RedirectToAction("Become", "Associate");
+				return RedirectToAction("Index", "Home");
 			}
-
-			return View(myWhiskeys);
 		}
 
 		[HttpGet]
@@ -140,9 +163,131 @@ namespace GepardOOD.Web.Controllers
 				return RedirectToAction("All", "Whiskey");
 			}
 
-			WhiskeyDetailsViewModel viewModel = await _whiskeyService.GetDetailsByIdAsync(id);
+			try
+			{
+				WhiskeyDetailsViewModel viewModel = await _whiskeyService.GetDetailsByIdAsync(id);
 
-			return View(viewModel);
+				return View(viewModel);
+			}
+			catch (Exception )
+			{
+				ModelState
+					.AddModelError
+						(string.Empty, "Unexpected error occurred! Please try again later or contact administrator.");
+
+				return RedirectToAction("Index", "Home");
+			}
+
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Edit(int id)
+		{
+			bool whiskeyExists = await _whiskeyService.ExistsByIdAsync(id);
+
+			if (!whiskeyExists)
+			{
+				TempData[ErrorMessage] = "Whiskey with the provided Id does not exist!";
+
+				return RedirectToAction("All", "Whiskey");
+			}
+
+			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(User.GetId()!);
+
+			if (!isUserAssociate)
+			{
+				TempData[ErrorMessage] = "You must become an associate in order to edit whiskey info!";
+
+				return RedirectToAction("Become", "Associate");
+			}
+
+			string? associateId =
+				await _associateService.GetAssociateIdByUserIdAsync(User.GetId()!);
+
+			bool isAssociateOwner = await _whiskeyService
+				.IsAssociateWithIdOwnerOfWhiskeyWithIdAsync(id, associateId!);
+
+			if (!isAssociateOwner)
+			{
+				TempData[ErrorMessage] = "You must be the owner of the whiskey in order to edit it!";
+
+				return RedirectToAction("Mine", "Whiskey");
+			}
+
+			try
+			{
+				WhiskeyFormModel formModel = await _whiskeyService.GetWhiskeyForEditByIdAsync(id);
+
+				formModel.WhiskeyCategories = await _whiskeyCategoryService.AllCategoriesAsync();
+
+				return View(formModel);
+			}
+			catch (Exception e)
+			{
+				ModelState
+					.AddModelError
+						(string.Empty, "Unexpected error occurred! Please try again later or contact administrator.");
+
+				return RedirectToAction("Index", "Home");
+			}
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(int id, WhiskeyFormModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				model.WhiskeyCategories = await _whiskeyCategoryService.AllCategoriesAsync();
+				return View(model);
+			}
+
+			bool whiskeyExists = await _whiskeyService.ExistsByIdAsync(id);
+
+			if (!whiskeyExists)
+			{
+				TempData[ErrorMessage] = "Whiskey with the provided Id does not exist!";
+
+				return RedirectToAction("All", "Whiskey");
+			}
+
+			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(User.GetId()!);
+
+			if (!isUserAssociate)
+			{
+				TempData[ErrorMessage] = "You must become an associate in order to edit whiskey info!";
+
+				return RedirectToAction("Become", "Associate");
+			}
+
+			string? associateId =
+				await _associateService.GetAssociateIdByUserIdAsync(User.GetId()!);
+
+			bool isAssociateOwner = await _whiskeyService
+				.IsAssociateWithIdOwnerOfWhiskeyWithIdAsync(id, associateId!);
+
+			if (!isAssociateOwner)
+			{
+				TempData[ErrorMessage] = "You must be the owner of the whiskey in order to edit it!";
+
+				return RedirectToAction("Mine", "Whiskey");
+			}
+
+			try
+			{
+				await _whiskeyService.EditWhiskeyByIdAndFormModelAsync(id, model);
+			}
+			catch (Exception)
+			{
+				ModelState
+					.AddModelError
+						(string.Empty, "Unexpected error occurred while trying to edit a whiskey! Please try again later or contact administrator.");
+
+				model.WhiskeyCategories = await _whiskeyCategoryService.AllCategoriesAsync();
+
+				return View(model);
+			}
+
+			return RedirectToAction("Details", "Whiskey", new { id });
 		}
 	}
 }

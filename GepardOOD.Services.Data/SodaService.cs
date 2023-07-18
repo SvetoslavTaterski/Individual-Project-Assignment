@@ -1,10 +1,11 @@
-﻿using GepardOOD.Data.Models;
-using GepardOOD.Services.Data.Interfaces;
+﻿using GepardOOD.Services.Data.Interfaces;
 using GepardOOD.Services.Data.Models.Soda;
 using GepardOOD.Web.Data;
 using GepardOOD.Web.ViewModels.Associate;
 using GepardOOD.Web.ViewModels.Soda;
 using GepardOOD.Web.ViewModels.Soda.Enums;
+using Soda = GepardOOD.Data.Models.Soda;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace GepardOOD.Services.Data
@@ -162,6 +163,33 @@ namespace GepardOOD.Services.Data
 					PhoneNumber = soda.Associate.PhoneNumber
 				}
 			};
+		}
+
+		public async Task<bool> IsAssociateWithIdOwnerOfSodaWithIdAsync(int sodaId, string associateId)
+		{
+			Soda soda = await _data
+			    .Sodas
+				.Where(b => b.IsActive)
+				.FirstAsync(b => b.Id == sodaId);
+
+			return soda.AssociateId.ToString() == associateId;
+		}
+
+		public async Task EditSodaByIdAndFormModelAsync(int sodaId, SodaFormModel model)
+		{
+			Soda soda = await _data
+				.Sodas
+				.Where(b => b.IsActive)
+				.FirstAsync(b => b.Id == sodaId);
+
+			soda.Name = model.Name;
+			soda.Manufacturer = model.Manufacturer;
+			soda.Description = model.Description;
+			soda.ImageUrl = model.ImageUrl;
+			soda.Price = model.Price;
+			soda.SodaCategoryId = model.CategoryId;
+
+			await _data.SaveChangesAsync();
 		}
 	}
 }

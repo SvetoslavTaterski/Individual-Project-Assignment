@@ -51,12 +51,23 @@ namespace GepardOOD.Web.Controllers
 				return RedirectToAction("Become", "Associate");
 			}
 
-			WineFormModel model = new WineFormModel()
+			try
 			{
-				WineCategories = await _wineCategoryService.AllCategoriesAsync()
-			};
+				WineFormModel model = new WineFormModel()
+				{
+					WineCategories = await _wineCategoryService.AllCategoriesAsync()
+				};
 
-			return View(model);
+				return View(model);
+			}
+			catch (Exception)
+			{
+				ModelState
+					.AddModelError
+						(string.Empty, "Unexpected error occurred! Please try again later or contact administrator.");
+
+				return RedirectToAction("Index", "Home");
+			}
 		}
 
 		[HttpPost]
@@ -111,20 +122,31 @@ namespace GepardOOD.Web.Controllers
 
 			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(userId);
 
-			if (isUserAssociate)
+			try
 			{
-				string? associateId = await _associateService.GetAssociateIdByUserIdAsync(userId);
+				if (isUserAssociate)
+				{
+					string? associateId = await _associateService.GetAssociateIdByUserIdAsync(userId);
 
-				myWines.AddRange(await _wineService.AllByAssociateIdAsync(associateId!));
+					myWines.AddRange(await _wineService.AllByAssociateIdAsync(associateId!));
+				}
+				else
+				{
+					TempData[ErrorMessage] = "You must become an associate in order to have added wines!";
+
+					return RedirectToAction("Become", "Associate");
+				}
+
+				return View(myWines);
 			}
-			else
+			catch (Exception)
 			{
-				TempData[ErrorMessage] = "You must become an associate in order to have added wines!";
+				ModelState
+					.AddModelError
+						(string.Empty, "Unexpected error occurred! Please try again later or contact administrator.");
 
-				return RedirectToAction("Become", "Associate");
+				return RedirectToAction("Index", "Home");
 			}
-
-			return View(myWines);
 		}
 
 		[HttpGet]
@@ -140,9 +162,131 @@ namespace GepardOOD.Web.Controllers
 				return RedirectToAction("All", "Wine");
 			}
 
-			WineDetailsViewModel viewModel = await _wineService.GetDetailsByIdAsync(id);
+			try
+			{
+				WineDetailsViewModel viewModel = await _wineService.GetDetailsByIdAsync(id);
 
-			return View(viewModel);
+				return View(viewModel);
+			}
+			catch (Exception)
+			{
+				ModelState
+					.AddModelError
+						(string.Empty, "Unexpected error occurred! Please try again later or contact administrator.");
+
+				return RedirectToAction("Index", "Home");
+			}
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Edit(int id)
+		{
+			bool wineExists = await _wineService.ExistsByIdAsync(id);
+
+			if (!wineExists)
+			{
+				TempData[ErrorMessage] = "Wine with the provided Id does not exist!";
+
+				return RedirectToAction("All", "Wine");
+			}
+
+			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(User.GetId()!);
+
+			if (!isUserAssociate)
+			{
+				TempData[ErrorMessage] = "You must become an associate in order to edit wine info!";
+
+				return RedirectToAction("Become", "Associate");
+			}
+
+			string? associateId =
+				await _associateService.GetAssociateIdByUserIdAsync(User.GetId()!);
+
+			bool isAssociateOwner = await _wineService
+				.IsAssociateWithIdOwnerOfWineWithIdAsync(id, associateId!);
+
+			if (!isAssociateOwner)
+			{
+				TempData[ErrorMessage] = "You must be the owner of the wine in order to edit it!";
+
+				return RedirectToAction("Mine", "Wine");
+			}
+
+			try
+			{
+				WineFormModel formModel = await _wineService.GetWineForEditByIdAsync(id);
+
+				formModel.WineCategories = await _wineCategoryService.AllCategoriesAsync();
+
+				return View(formModel);
+			}
+			catch (Exception e)
+			{
+				ModelState
+					.AddModelError
+						(string.Empty, "Unexpected error occurred! Please try again later or contact administrator.");
+
+				return RedirectToAction("Index", "Home");
+			}
+
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(int id, WineFormModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				model.WineCategories = await _wineCategoryService.AllCategoriesAsync();
+				return View(model);
+			}
+
+			bool wineExists = await _wineService.ExistsByIdAsync(id);
+
+			if (!wineExists)
+			{
+				TempData[ErrorMessage] = "Wine with the provided Id does not exist!";
+
+				return RedirectToAction("All", "Wine");
+			}
+
+			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(User.GetId()!);
+
+			if (!isUserAssociate)
+			{
+				TempData[ErrorMessage] = "You must become an associate in order to edit wine info!";
+
+				return RedirectToAction("Become", "Associate");
+			}
+
+			string? associateId =
+				await _associateService.GetAssociateIdByUserIdAsync(User.GetId()!);
+
+			bool isAssociateOwner = await _wineService
+				.IsAssociateWithIdOwnerOfWineWithIdAsync(id, associateId!);
+
+			if (!isAssociateOwner)
+			{
+				TempData[ErrorMessage] = "You must be the owner of the wine in order to edit it!";
+
+				return RedirectToAction("Mine", "Wine");
+			}
+
+			try
+			{
+				await _wineService.EditWineByIdAndFormModelAsync(id, model);
+			}
+			catch (Exception)
+			{
+				ModelState
+					.AddModelError
+						(string.Empty, "Unexpected error occurred while trying to edit a wine! Please try again later or contact administrator.");
+
+				model.WineCategories = await _wineCategoryService.AllCategoriesAsync();
+
+				return View(model);
+			}
+
+			return RedirectToAction("Details", "Wine", new { id });
 		}
 	}
 }

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GepardOOD.Web.Controllers
 {
-    [Authorize]
+	[Authorize]
 	public class BeerController : Controller
 	{
 		private readonly IBeerCategoryService _beerCategoryService;
@@ -27,7 +27,7 @@ namespace GepardOOD.Web.Controllers
 
 		[AllowAnonymous]
 		[HttpGet]
-		public async Task<IActionResult> All([FromQuery]AllBeerQueryModel queryModel)
+		public async Task<IActionResult> All([FromQuery] AllBeerQueryModel queryModel)
 		{
 			AllBeersFilteredAndPagedServiceModel serviceModel =
 				await _beerService.AllAsync(queryModel);
@@ -51,12 +51,21 @@ namespace GepardOOD.Web.Controllers
 				return RedirectToAction("Become", "Associate");
 			}
 
-			BeerFormModel model = new BeerFormModel()
+			try
 			{
-				BeerCategories = await _beerCategoryService.AllCategoriesAsync()
-			};
+				BeerFormModel model = new BeerFormModel()
+				{
+					BeerCategories = await _beerCategoryService.AllCategoriesAsync()
+				};
 
-			return View(model);
+				return View(model);
+			}
+			catch (Exception)
+			{
+				ModelState.AddModelError(string.Empty, "Unexpected error occurred while trying to add a new Beer! Please try again later or contact Administrator.");
+
+				return RedirectToAction("Index", "Home");
+			}
 		}
 
 		[HttpPost]
@@ -112,20 +121,29 @@ namespace GepardOOD.Web.Controllers
 
 			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(userId);
 
-			if (isUserAssociate)
+			try
 			{
-				string? associateId = await _associateService.GetAssociateIdByUserIdAsync(userId);
+				if (isUserAssociate)
+				{
+					string? associateId = await _associateService.GetAssociateIdByUserIdAsync(userId);
 
-				myBeers.AddRange(await _beerService.AllByAssociateIdAsync(associateId!));
+					myBeers.AddRange(await _beerService.AllByAssociateIdAsync(associateId!));
+				}
+				else
+				{
+					TempData[ErrorMessage] = "You must become an associate in order to have added beers!";
+
+					return RedirectToAction("Become", "Associate");
+				}
+
+				return View(myBeers);
 			}
-			else
+			catch (Exception)
 			{
-				TempData[ErrorMessage] = "You must become an associate in order to have added beers!";
+				TempData[ErrorMessage] = "Unexpected error occurred! Please try again later or contact administrator.";
 
-				return RedirectToAction("Become", "Associate");
+				return RedirectToAction("Index", "Home");
 			}
-
-			return View(myBeers);
 		}
 
 		[HttpGet]
@@ -141,15 +159,128 @@ namespace GepardOOD.Web.Controllers
 				return RedirectToAction("All", "Beer");
 			}
 
-			BeerDetailsViewModel viewModel = await _beerService.GetDetailsByIdAsync(id);
+			try
+			{
+				BeerDetailsViewModel viewModel = await _beerService.GetDetailsByIdAsync(id);
 
-			return View(viewModel);
+				return View(viewModel);
+			}
+			catch (Exception)
+			{
+				TempData[ErrorMessage] = "Unexpected error occurred! Please try again later or contact administrator.";
+
+				return RedirectToAction("Index", "Home");
+			}
 		}
 
 		[HttpGet]
 		public async Task<IActionResult> Edit(int id)
 		{
+			bool beerExists = await _beerService.ExistsByIdAsync(id);
 
+			if (!beerExists)
+			{
+				TempData[ErrorMessage] = "Beer with the provided Id does not exist!";
+
+				return RedirectToAction("All", "Beer");
+			}
+
+			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(User.GetId()!);
+
+			if (!isUserAssociate)
+			{
+				TempData[ErrorMessage] = "You must become an associate in order to edit beer info!";
+
+				return RedirectToAction("Become", "Associate");
+			}
+
+			string? associateId =
+				await _associateService.GetAssociateIdByUserIdAsync(User.GetId()!);
+
+			bool isAssociateOwner = await _beerService
+				.IsAssociateWithIdOwnerOfBeerWithIdAsync(id, associateId!);
+
+			if (!isAssociateOwner)
+			{
+				TempData[ErrorMessage] = "You must be the owner of the beer in order to edit it!";
+
+				return RedirectToAction("Mine", "Beer");
+			}
+
+
+			try
+			{
+				BeerFormModel formModel = await _beerService.GetBeerForEditByIdAsync(id);
+
+				formModel.BeerCategories = await _beerCategoryService.AllCategoriesAsync();
+
+				return View(formModel);
+			}
+			catch (Exception)
+			{
+				TempData[ErrorMessage] = "Unexpected error occurred while trying to edit a beer! Please try again later or contact administrator.";
+
+				return RedirectToAction("Index", "Home");
+			}
+
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(int id, BeerFormModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				model.BeerCategories = await _beerCategoryService.AllCategoriesAsync();
+				return View(model);
+			}
+
+			bool beerExists = await _beerService.ExistsByIdAsync(id);
+
+			if (!beerExists)
+			{
+				TempData[ErrorMessage] = "Beer with the provided Id does not exist!";
+
+				return RedirectToAction("All", "Beer");
+			}
+
+			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(User.GetId()!);
+
+			if (!isUserAssociate)
+			{
+				TempData[ErrorMessage] = "You must become an associate in order to edit beer info!";
+
+				return RedirectToAction("Become", "Associate");
+			}
+
+			string? associateId =
+				await _associateService.GetAssociateIdByUserIdAsync(User.GetId()!);
+
+			bool isAssociateOwner = await _beerService
+				.IsAssociateWithIdOwnerOfBeerWithIdAsync(id, associateId!);
+
+			if (!isAssociateOwner)
+			{
+				TempData[ErrorMessage] = "You must be the owner of the beer in order to edit it!";
+
+				return RedirectToAction("Mine", "Beer");
+			}
+
+			try
+			{
+				await _beerService.EditBeerByIdAndFormModelAsync(id, model);
+			}
+			catch (Exception)
+			{
+				ModelState
+					.AddModelError
+						(string.Empty, "Unexpected error occurred while trying to edit a beer! Please try again later or contact administrator.");
+
+				model.BeerCategories = await _beerCategoryService.AllCategoriesAsync();
+
+				return View(model);
+			}
+
+			return RedirectToAction("Details", "Beer", new { id });
 		}
 	}
 }

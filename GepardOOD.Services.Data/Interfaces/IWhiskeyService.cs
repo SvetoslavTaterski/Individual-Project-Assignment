@@ -17,5 +17,9 @@ namespace GepardOOD.Services.Data.Interfaces
 		Task<bool> ExistsByIdAsync(int whiskeyId);
 
 		Task<WhiskeyFormModel> GetWhiskeyForEditByIdAsync(int whiskeyId);
+
+		Task<bool> IsAssociateWithIdOwnerOfWhiskeyWithIdAsync(int whiskeyId, string associateId);
+
+		Task EditWhiskeyByIdAndFormModelAsync(int whiskeyId, WhiskeyFormModel model);
 	}
 }

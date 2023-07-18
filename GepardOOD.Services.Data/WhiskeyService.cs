@@ -1,5 +1,4 @@
-﻿using GepardOOD.Data.Models;
-using GepardOOD.Services.Data.Interfaces;
+﻿using GepardOOD.Services.Data.Interfaces;
 using GepardOOD.Services.Data.Models.Whiskey;
 using GepardOOD.Web.Data;
 using GepardOOD.Web.ViewModels.Associate;
@@ -8,8 +7,7 @@ using GepardOOD.Web.ViewModels.Whiskey.Enums;
 using Whiskey = GepardOOD.Data.Models.Whiskey;
 
 using Microsoft.EntityFrameworkCore;
-using static GepardOOD.Common.EntityValidationConstants;
-using GepardOOD.Web.ViewModels.Beer;
+
 
 namespace GepardOOD.Services.Data
 {
@@ -111,6 +109,23 @@ namespace GepardOOD.Services.Data
 			await _data.SaveChangesAsync();
 		}
 
+		public async Task EditWhiskeyByIdAndFormModelAsync(int whiskeyId, WhiskeyFormModel model)
+		{
+			Whiskey whiskey = await _data
+				.Whiskeys
+				.Where(b => b.IsActive)
+				.FirstAsync(b => b.Id == whiskeyId);
+
+			whiskey.Name = model.Name;
+			whiskey.Manufacturer = model.Manufacturer;
+			whiskey.Description = model.Description;
+			whiskey.ImageUrl = model.ImageUrl;
+			whiskey.Price = model.Price;
+			whiskey.WhiskeyCategoryId = model.CategoryId;
+
+			await _data.SaveChangesAsync();
+		}
+
 		public async Task<bool> ExistsByIdAsync(int whiskeyId)
 		{
 			bool result = await _data
@@ -166,6 +181,16 @@ namespace GepardOOD.Services.Data
 				Price = beer.Price,
 				CategoryId = beer.WhiskeyCategoryId,
 			};
+		}
+
+		public async Task<bool> IsAssociateWithIdOwnerOfWhiskeyWithIdAsync(int whiskeyId, string associateId)
+		{
+			Whiskey whiskey = await _data
+				.Whiskeys
+				.Where(b => b.IsActive)
+				.FirstAsync(b => b.Id == whiskeyId);
+
+			return whiskey.AssociateId.ToString() == associateId;
 		}
 	}
 }

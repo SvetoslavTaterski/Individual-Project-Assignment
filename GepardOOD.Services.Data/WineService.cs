@@ -7,7 +7,6 @@ using GepardOOD.Web.ViewModels.Wine.Enums;
 using Wine = GepardOOD.Data.Models.Wine;
 
 using Microsoft.EntityFrameworkCore;
-using GepardOOD.Web.ViewModels.Beer;
 
 namespace GepardOOD.Services.Data
 {
@@ -109,6 +108,23 @@ namespace GepardOOD.Services.Data
 			await _data.SaveChangesAsync();
 		}
 
+		public async Task EditWineByIdAndFormModelAsync(int wineId, WineFormModel model)
+		{
+			Wine wine = await _data
+				.Wines
+				.Where(b => b.IsActive)
+				.FirstAsync(b => b.Id == wineId);
+
+			wine.Name = model.Name;
+			wine.Manufacturer = model.Manufacturer;
+			wine.Description = model.Description;
+			wine.ImageUrl = model.ImageUrl;
+			wine.Price = model.Price;
+			wine.WineCategoryId = model.CategoryId;
+
+			await _data.SaveChangesAsync();
+		}
+
 		public async Task<bool> ExistsByIdAsync(int wineId)
 		{
 			bool result = await _data
@@ -164,6 +180,16 @@ namespace GepardOOD.Services.Data
 				Price = wine.Price,
 				CategoryId = wine.WineCategoryId,
 			};
+		}
+
+		public async Task<bool> IsAssociateWithIdOwnerOfWineWithIdAsync(int wineId, string associateId)
+		{
+			Wine wine = await _data
+				.Wines
+				.Where(b => b.IsActive)
+				.FirstAsync(b => b.Id == wineId);
+
+			return wine.AssociateId.ToString() == associateId;
 		}
 	}
 }

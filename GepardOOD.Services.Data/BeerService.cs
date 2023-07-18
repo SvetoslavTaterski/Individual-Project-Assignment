@@ -34,8 +34,8 @@ namespace GepardOOD.Services.Data
 
 				beerQuery = beerQuery
 					.Where(b => EF.Functions.Like(b.Name, wildCard) ||
-					            EF.Functions.Like(b.Manufacturer, wildCard) ||
-					            EF.Functions.Like(b.Description, wildCard));
+								EF.Functions.Like(b.Manufacturer, wildCard) ||
+								EF.Functions.Like(b.Description, wildCard));
 			}
 
 			beerQuery = beerModel.BeerSorting switch
@@ -75,8 +75,8 @@ namespace GepardOOD.Services.Data
 		{
 			IEnumerable<BeerAllViewModel> allAssociateBeers = await this._dbContext
 				.Beers
-				.Where(a =>a.IsActive &&
-				           a.AssociateId.ToString() == associateId)
+				.Where(a => a.IsActive &&
+						   a.AssociateId.ToString() == associateId)
 				.Select(b => new BeerAllViewModel
 				{
 					Id = b.Id,
@@ -108,20 +108,45 @@ namespace GepardOOD.Services.Data
 			await _dbContext.SaveChangesAsync();
 		}
 
-		public async Task<BeerDetailsViewModel?> GetDetailsByIdAsync(int beerId)
+		public async Task<bool> ExistsByIdAsync(int beerId)
 		{
-			Beer? beer = await _dbContext
+			bool result = await _dbContext
+				.Beers
+				.Where(b => b.IsActive)
+				.AnyAsync(b => b.Id == beerId);
+
+			return result;
+		}
+
+		public async Task<BeerFormModel> GetBeerForEditByIdAsync(int beerId)
+		{
+			Beer beer = await _dbContext
+				.Beers
+				.Include(b => b.BeerCategory)
+				.Where(b => b.IsActive)
+				.FirstAsync(b => b.Id == beerId);
+
+			return new BeerFormModel
+			{
+				Id = beer.Id,
+				Name = beer.Name,
+				Manufacturer = beer.Manufacturer,
+				Description = beer.Description,
+				ImageUrl = beer.ImageUrl,
+				Price = beer.Price,
+				CategoryId = beer.BeerCategoryId,
+			};
+		}
+
+		public async Task<BeerDetailsViewModel> GetDetailsByIdAsync(int beerId)
+		{
+			Beer beer = await _dbContext
 				.Beers
 				.Include(b => b.BeerCategory)
 				.Include(b => b.Associate)
 				.ThenInclude(a => a.User)
 				.Where(b => b.IsActive)
-				.FirstOrDefaultAsync(b => b.Id == beerId);
-
-			if (beer == null)
-			{
-				return null;
-			}
+				.FirstAsync(b => b.Id == beerId);
 
 			return new BeerDetailsViewModel
 			{

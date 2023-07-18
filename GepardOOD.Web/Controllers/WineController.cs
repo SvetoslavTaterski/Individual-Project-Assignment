@@ -131,14 +131,16 @@ namespace GepardOOD.Web.Controllers
 		[AllowAnonymous]
 		public async Task<IActionResult> Details(int id)
 		{
-			WineDetailsViewModel? viewModel = await _wineService.GetDetailsByIdAsync(id);
+			bool wineExists = await _wineService.ExistsByIdAsync(id);
 
-			if (viewModel == null)
+			if (!wineExists)
 			{
 				TempData[ErrorMessage] = "Wine with the provided Id does not exist!";
 
 				return RedirectToAction("All", "Wine");
 			}
+
+			WineDetailsViewModel viewModel = await _wineService.GetDetailsByIdAsync(id);
 
 			return View(viewModel);
 		}

@@ -1,5 +1,4 @@
 ﻿using GepardOOD.Services.Data.Models.Wine;
-using GepardOOD.Web.ViewModels.Soda;
 using GepardOOD.Web.ViewModels.Wine;
 
 namespace GepardOOD.Services.Data.Interfaces
@@ -12,6 +11,10 @@ namespace GepardOOD.Services.Data.Interfaces
 
 		Task<IEnumerable<WineAllViewModel>> AllByAssociateIdAsync(string associateId);
 
-		Task<WineDetailsViewModel?> GetDetailsByIdAsync(int wineId);
+		Task<WineDetailsViewModel> GetDetailsByIdAsync(int wineId);
+
+		Task<bool> ExistsByIdAsync(int wineId);
+
+		Task<WineFormModel> GetWineForEditByIdAsync(int wineId);
 	}
 }

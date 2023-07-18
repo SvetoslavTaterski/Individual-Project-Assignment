@@ -7,6 +7,7 @@ using GepardOOD.Web.ViewModels.Wine.Enums;
 using Wine = GepardOOD.Data.Models.Wine;
 
 using Microsoft.EntityFrameworkCore;
+using GepardOOD.Web.ViewModels.Beer;
 
 namespace GepardOOD.Services.Data
 {
@@ -108,20 +109,25 @@ namespace GepardOOD.Services.Data
 			await _data.SaveChangesAsync();
 		}
 
-		public async Task<WineDetailsViewModel?> GetDetailsByIdAsync(int wineId)
+		public async Task<bool> ExistsByIdAsync(int wineId)
 		{
-			Wine? wine = await _data
+			bool result = await _data
+				.Wines
+				.Where(b => b.IsActive)
+				.AnyAsync(b => b.Id == wineId);
+
+			return result;
+		}
+
+		public async Task<WineDetailsViewModel> GetDetailsByIdAsync(int wineId)
+		{
+			Wine wine = await _data
 				.Wines
 				.Include(b => b.WineCategory)
 			    .Include(b => b.Associate)
 				.ThenInclude(a => a.User)
 				.Where(b => b.IsActive)
-				.FirstOrDefaultAsync(b => b.Id == wineId);
-
-			if (wine == null)
-			{
-				return null;
-			}
+				.FirstAsync(b => b.Id == wineId);
 
 			return new WineDetailsViewModel()
 			{
@@ -137,6 +143,26 @@ namespace GepardOOD.Services.Data
 					Email = wine.Associate.User.Email,
 					PhoneNumber = wine.Associate.PhoneNumber
 				}
+			};
+		}
+
+		public async Task<WineFormModel> GetWineForEditByIdAsync(int wineId)
+		{
+			Wine wine = await _data
+				.Wines
+				.Include(b => b.WineCategory)
+				.Where(b => b.IsActive)
+				.FirstAsync(b => b.Id == wineId);
+
+			return new WineFormModel()
+			{
+				Id = wine.Id,
+				Name = wine.Name,
+				Manufacturer = wine.Manufacturer,
+				Description = wine.Description,
+				ImageUrl = wine.ImageUrl,
+				Price = wine.Price,
+				CategoryId = wine.WineCategoryId,
 			};
 		}
 	}

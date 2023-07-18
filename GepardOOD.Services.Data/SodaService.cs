@@ -107,20 +107,45 @@ namespace GepardOOD.Services.Data
 			await _data.SaveChangesAsync();
 		}
 
-		public async Task<SodaDetailsViewModel?> GetDetailsByIdAsync(int sodaId)
+		public async Task<bool> ExistsByIdAsync(int sodaId)
 		{
-			Soda? soda = await _data
+			bool result = await _data
+				.Sodas
+				.Where(b => b.IsActive)
+				.AnyAsync(b => b.Id == sodaId);
+
+			return result;
+		}
+
+		public async Task<SodaFormModel> GetSodaForEditByIdAsync(int sodaId)
+		{
+			Soda beer = await _data
+				.Sodas
+				.Include(b => b.SodaCategory)
+				.Where(b => b.IsActive)
+				.FirstAsync(b => b.Id == sodaId);
+
+			return new SodaFormModel()
+			{
+				Id = beer.Id,
+				Name = beer.Name,
+				Manufacturer = beer.Manufacturer,
+				Description = beer.Description,
+				ImageUrl = beer.ImageUrl,
+				Price = beer.Price,
+				CategoryId = beer.SodaCategoryId,
+			};
+		}
+
+		public async Task<SodaDetailsViewModel> GetDetailsByIdAsync(int sodaId)
+		{
+			Soda soda = await _data
 				.Sodas
 				.Include(b => b.SodaCategory)
 				.Include(b => b.Associate)
 				.ThenInclude(a => a.User)
 				.Where(b => b.IsActive)
-				.FirstOrDefaultAsync(b => b.Id == sodaId);
-
-			if (soda == null)
-			{
-				return null;
-			}
+				.FirstAsync(b => b.Id == sodaId);
 
 			return new SodaDetailsViewModel()
 			{

@@ -13,6 +13,10 @@ namespace GepardOOD.Services.Data.Interfaces
 
 		Task<IEnumerable<SodaAllViewModel>> AllByAssociateIdAsync(string associateId);
 
-		Task<SodaDetailsViewModel?> GetDetailsByIdAsync(int sodaId);
+		Task<SodaDetailsViewModel> GetDetailsByIdAsync(int sodaId);
+
+		Task<bool> ExistsByIdAsync(int sodaId);
+
+		Task<SodaFormModel> GetSodaForEditByIdAsync(int sodaId);
 	}
 }

@@ -133,14 +133,16 @@ namespace GepardOOD.Web.Controllers
 		[AllowAnonymous]
 		public async Task<IActionResult> Details(int id)
 		{
-			SodaDetailsViewModel? viewModel = await _sodaService.GetDetailsByIdAsync(id);
+			bool sodaExists = await _sodaService.ExistsByIdAsync(id);
 
-			if (viewModel == null)
+			if (!sodaExists)
 			{
 				TempData[ErrorMessage] = "Soda with the provided Id does not exist!";
 
 				return RedirectToAction("All", "Soda");
 			}
+
+			SodaDetailsViewModel viewModel = await _sodaService.GetDetailsByIdAsync(id);
 
 			return View(viewModel);
 		}

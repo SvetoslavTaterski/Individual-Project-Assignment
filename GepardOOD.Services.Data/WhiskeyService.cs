@@ -5,10 +5,11 @@ using GepardOOD.Web.Data;
 using GepardOOD.Web.ViewModels.Associate;
 using GepardOOD.Web.ViewModels.Whiskey;
 using GepardOOD.Web.ViewModels.Whiskey.Enums;
+using Whiskey = GepardOOD.Data.Models.Whiskey;
 
 using Microsoft.EntityFrameworkCore;
 using static GepardOOD.Common.EntityValidationConstants;
-using Whiskey = GepardOOD.Data.Models.Whiskey;
+using GepardOOD.Web.ViewModels.Beer;
 
 namespace GepardOOD.Services.Data
 {
@@ -36,8 +37,8 @@ namespace GepardOOD.Services.Data
 
 				whiskeyQuery = whiskeyQuery
 					.Where(s => EF.Functions.Like(s.Name, wildCard) ||
-					            EF.Functions.Like(s.Manufacturer, wildCard) ||
-					            EF.Functions.Like(s.Description, wildCard));
+								EF.Functions.Like(s.Manufacturer, wildCard) ||
+								EF.Functions.Like(s.Description, wildCard));
 			}
 
 			whiskeyQuery = whiskeyModel.WhiskeySorting switch
@@ -78,7 +79,7 @@ namespace GepardOOD.Services.Data
 			IEnumerable<WhiskeyAllViewModel> allAssociateWhiskeys = await _data
 				.Whiskeys
 				.Where(a => a.IsActive &&
-				            a.AssociateId.ToString() == associateId)
+							a.AssociateId.ToString() == associateId)
 				.Select(b => new WhiskeyAllViewModel()
 				{
 					Id = b.Id,
@@ -110,20 +111,25 @@ namespace GepardOOD.Services.Data
 			await _data.SaveChangesAsync();
 		}
 
-		public async Task<WhiskeyDetailsViewModel?> GetDetailsByIdAsync(int whiskeyId)
+		public async Task<bool> ExistsByIdAsync(int whiskeyId)
 		{
-			Whiskey? whiskey = await _data
+			bool result = await _data
+			    .Whiskeys
+				.Where(b => b.IsActive)
+				.AnyAsync(b => b.Id == whiskeyId);
+
+			return result;
+		}
+
+		public async Task<WhiskeyDetailsViewModel> GetDetailsByIdAsync(int whiskeyId)
+		{
+			Whiskey whiskey = await _data
 				.Whiskeys
 				.Include(b => b.WhiskeyCategory)
-			    .Include(b => b.Associate)
+				.Include(b => b.Associate)
 				.ThenInclude(a => a.User)
 				.Where(b => b.IsActive)
-				.FirstOrDefaultAsync(b => b.Id == whiskeyId);
-
-			if (whiskey == null)
-			{
-				return null;
-			}
+				.FirstAsync(b => b.Id == whiskeyId);
 
 			return new WhiskeyDetailsViewModel()
 			{
@@ -139,6 +145,26 @@ namespace GepardOOD.Services.Data
 					Email = whiskey.Associate.User.Email,
 					PhoneNumber = whiskey.Associate.PhoneNumber
 				}
+			};
+		}
+
+		public async Task<WhiskeyFormModel> GetWhiskeyForEditByIdAsync(int whiskeyId)
+		{
+			Whiskey beer = await _data
+				.Whiskeys
+				.Include(b => b.WhiskeyCategory)
+				.Where(b => b.IsActive)
+				.FirstAsync(b => b.Id == whiskeyId);
+
+			return new WhiskeyFormModel()
+			{
+				Id = beer.Id,
+				Name = beer.Name,
+				Manufacturer = beer.Manufacturer,
+				Description = beer.Description,
+				ImageUrl = beer.ImageUrl,
+				Price = beer.Price,
+				CategoryId = beer.WhiskeyCategoryId,
 			};
 		}
 	}

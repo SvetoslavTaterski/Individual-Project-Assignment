@@ -7,6 +7,7 @@ using GepardOOD.Web.ViewModels.Soda.Enums;
 using Soda = GepardOOD.Data.Models.Soda;
 
 using Microsoft.EntityFrameworkCore;
+using GepardOOD.Web.ViewModels.Beer;
 
 namespace GepardOOD.Services.Data
 {
@@ -188,6 +189,33 @@ namespace GepardOOD.Services.Data
 			soda.ImageUrl = model.ImageUrl;
 			soda.Price = model.Price;
 			soda.SodaCategoryId = model.CategoryId;
+
+			await _data.SaveChangesAsync();
+		}
+
+		public async Task<SodaPreDeleteViewModel> GetBeerForDeleteByIdAsync(int sodaId)
+		{
+			Soda soda = await _data
+				.Sodas
+				.Where(b => b.IsActive)
+				.FirstAsync(b => b.Id == sodaId);
+
+			return new SodaPreDeleteViewModel()
+			{
+				Name = soda.Name,
+				Manufacturer = soda.Manufacturer,
+				ImageUrl = soda.ImageUrl
+			};
+		}
+
+		public async Task DeleteBeerByIdAsync(int sodaId)
+		{
+			Soda soda = await _data
+				.Sodas
+				.Where(b => b.IsActive)
+				.FirstAsync(b => b.Id == sodaId);
+
+			soda.IsActive = false;
 
 			await _data.SaveChangesAsync();
 		}

@@ -109,6 +109,18 @@ namespace GepardOOD.Services.Data
 			await _data.SaveChangesAsync();
 		}
 
+		public async Task DeleteWhiskeyByIdAsync(int whiskeyId)
+		{
+			Whiskey whiskey = await _data
+				.Whiskeys
+				.Where(w => w.IsActive)
+				.FirstAsync(w => w.Id == whiskeyId);
+
+			whiskey.IsActive = false;
+
+			await _data.SaveChangesAsync();
+		}
+
 		public async Task EditWhiskeyByIdAndFormModelAsync(int whiskeyId, WhiskeyFormModel model)
 		{
 			Whiskey whiskey = await _data
@@ -160,6 +172,21 @@ namespace GepardOOD.Services.Data
 					Email = whiskey.Associate.User.Email,
 					PhoneNumber = whiskey.Associate.PhoneNumber
 				}
+			};
+		}
+
+		public async Task<WhiskeyPreDeleteViewModel> GetWhiskeyForDeleteByIdAsync(int whiskeyId)
+		{
+			Whiskey whiskey = await _data
+				.Whiskeys
+				.Where(w => w.IsActive)
+				.FirstAsync(w => w.Id == whiskeyId);
+
+			return new WhiskeyPreDeleteViewModel()
+			{
+				Name = whiskey.Name,
+				Manufacturer = whiskey.Manufacturer,
+				ImageUrl = whiskey.ImageUrl
 			};
 		}
 

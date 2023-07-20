@@ -289,5 +289,107 @@ namespace GepardOOD.Web.Controllers
 
 			return RedirectToAction("Details", "Whiskey", new { id });
 		}
+
+		[HttpGet]
+		public async Task<IActionResult> Delete(int id)
+		{
+			bool whiskeyExists = await _whiskeyService.ExistsByIdAsync(id);
+
+			if (!whiskeyExists)
+			{
+				TempData[ErrorMessage] = "Whiskey with the provided Id does not exist!";
+
+				return RedirectToAction("All", "Whiskey");
+			}
+
+			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(User.GetId()!);
+
+			if (!isUserAssociate)
+			{
+				TempData[ErrorMessage] = "You must become an associate in order to edit whiskey info!";
+
+				return RedirectToAction("Become", "Associate");
+			}
+
+			string? associateId =
+				await _associateService.GetAssociateIdByUserIdAsync(User.GetId()!);
+
+			bool isAssociateOwner = await _whiskeyService
+				.IsAssociateWithIdOwnerOfWhiskeyWithIdAsync(id, associateId!);
+
+			if (!isAssociateOwner)
+			{
+				TempData[ErrorMessage] = "You must be the owner of the whiskey in order to edit it!";
+
+				return RedirectToAction("Mine", "Whiskey");
+			}
+
+			try
+			{
+				WhiskeyPreDeleteViewModel viewModel = await _whiskeyService.GetWhiskeyForDeleteByIdAsync(id);
+
+				return this.View(viewModel);
+			}
+			catch (Exception)
+			{
+				ModelState
+					.AddModelError
+						(string.Empty, "Unexpected error occurred while trying to delete a whiskey! Please try again later or contact administrator.");
+
+				return RedirectToAction("Index", "Home");
+			}
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Delete(int id, WhiskeyPreDeleteViewModel model)
+		{
+			bool whiskeyExists = await _whiskeyService.ExistsByIdAsync(id);
+
+			if (!whiskeyExists)
+			{
+				TempData[ErrorMessage] = "Whiskey with the provided Id does not exist!";
+
+				return RedirectToAction("All", "Whiskey");
+			}
+
+			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(User.GetId()!);
+
+			if (!isUserAssociate)
+			{
+				TempData[ErrorMessage] = "You must become an associate in order to edit whiskey info!";
+
+				return RedirectToAction("Become", "Associate");
+			}
+
+			string? associateId =
+				await _associateService.GetAssociateIdByUserIdAsync(User.GetId()!);
+
+			bool isAssociateOwner = await _whiskeyService
+				.IsAssociateWithIdOwnerOfWhiskeyWithIdAsync(id, associateId!);
+
+			if (!isAssociateOwner)
+			{
+				TempData[ErrorMessage] = "You must be the owner of the whiskey in order to edit it!";
+
+				return RedirectToAction("Mine", "Whiskey");
+			}
+
+			try
+			{
+				await _whiskeyService.DeleteWhiskeyByIdAsync(id);
+
+				TempData[WarningMessage] = "The whiskey was successfully deleted!";
+
+				return RedirectToAction("Mine", "Whiskey");
+			}
+			catch (Exception)
+			{
+				ModelState
+					.AddModelError
+						(string.Empty, "Unexpected error occurred while trying to delete a whiskey! Please try again later or contact administrator.");
+
+				return RedirectToAction("Index", "Home");
+			}
+		}
 	}
 }

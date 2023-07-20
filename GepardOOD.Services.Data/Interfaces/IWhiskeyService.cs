@@ -21,5 +21,9 @@ namespace GepardOOD.Services.Data.Interfaces
 		Task<bool> IsAssociateWithIdOwnerOfWhiskeyWithIdAsync(int whiskeyId, string associateId);
 
 		Task EditWhiskeyByIdAndFormModelAsync(int whiskeyId, WhiskeyFormModel model);
+
+		Task<WhiskeyPreDeleteViewModel> GetWhiskeyForDeleteByIdAsync(int whiskeyId);
+
+		Task DeleteWhiskeyByIdAsync(int whiskeyId);
 	}
 }

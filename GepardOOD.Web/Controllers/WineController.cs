@@ -386,7 +386,7 @@ namespace GepardOOD.Web.Controllers
 			{
 				ModelState
 					.AddModelError
-						(string.Empty, "Unexpected error occurred while trying to delete a soda! Please try again later or contact administrator.");
+						(string.Empty, "Unexpected error occurred while trying to delete a wine! Please try again later or contact administrator.");
 
 				return RedirectToAction("Index", "Home");
 			}

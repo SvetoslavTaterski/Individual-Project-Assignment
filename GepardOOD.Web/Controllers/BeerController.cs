@@ -282,5 +282,107 @@ namespace GepardOOD.Web.Controllers
 
 			return RedirectToAction("Details", "Beer", new { id });
 		}
+
+		[HttpGet]
+		public async Task<IActionResult> Delete(int id)
+		{
+			bool beerExists = await _beerService.ExistsByIdAsync(id);
+
+			if (!beerExists)
+			{
+				TempData[ErrorMessage] = "Beer with the provided Id does not exist!";
+
+				return RedirectToAction("All", "Beer");
+			}
+
+			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(User.GetId()!);
+
+			if (!isUserAssociate)
+			{
+				TempData[ErrorMessage] = "You must become an associate in order to delete beer info!";
+
+				return RedirectToAction("Become", "Associate");
+			}
+
+			string? associateId =
+				await _associateService.GetAssociateIdByUserIdAsync(User.GetId()!);
+
+			bool isAssociateOwner = await _beerService
+				.IsAssociateWithIdOwnerOfBeerWithIdAsync(id, associateId!);
+
+			if (!isAssociateOwner)
+			{
+				TempData[ErrorMessage] = "You must be the owner of the beer in order to delete it!";
+
+				return RedirectToAction("Mine", "Beer");
+			}
+
+			try
+			{
+				BeerPreDeleteViewModel viewModel = await _beerService.GetBeerForDeleteByIdAsync(id);
+
+				return this.View(viewModel);
+			}
+			catch (Exception)
+			{
+				ModelState
+					.AddModelError
+						(string.Empty, "Unexpected error occurred while trying to delete a beer! Please try again later or contact administrator.");
+
+				return RedirectToAction("Index", "Home");
+			}
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Delete(int id, BeerPreDeleteViewModel model)
+		{
+			bool beerExists = await _beerService.ExistsByIdAsync(id);
+
+			if (!beerExists)
+			{
+				TempData[ErrorMessage] = "Beer with the provided Id does not exist!";
+
+				return RedirectToAction("All", "Beer");
+			}
+
+			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(User.GetId()!);
+
+			if (!isUserAssociate)
+			{
+				TempData[ErrorMessage] = "You must become an associate in order to delete beer info!";
+
+				return RedirectToAction("Become", "Associate");
+			}
+
+			string? associateId =
+				await _associateService.GetAssociateIdByUserIdAsync(User.GetId()!);
+
+			bool isAssociateOwner = await _beerService
+				.IsAssociateWithIdOwnerOfBeerWithIdAsync(id, associateId!);
+
+			if (!isAssociateOwner)
+			{
+				TempData[ErrorMessage] = "You must be the owner of the beer in order to delete it!";
+
+				return RedirectToAction("Mine", "Beer");
+			}
+
+			try
+			{
+				await _beerService.DeleteBeerByIdAsync(id);
+
+				TempData[WarningMessage] = "The beer was successfully deleted!";
+
+				return RedirectToAction("Mine", "Beer");
+			}
+			catch (Exception)
+			{
+				ModelState
+					.AddModelError
+						(string.Empty, "Unexpected error occurred while trying to delete a beer! Please try again later or contact administrator.");
+
+				return RedirectToAction("Index", "Home");
+			}
+		}
 	}
 }

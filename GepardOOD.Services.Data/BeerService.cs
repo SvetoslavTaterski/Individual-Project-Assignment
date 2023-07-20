@@ -108,6 +108,18 @@ namespace GepardOOD.Services.Data
 			await _dbContext.SaveChangesAsync();
 		}
 
+		public async Task DeleteBeerByIdAsync(int beerId)
+		{
+			Beer beer = await _dbContext
+				.Beers
+				.Where(b => b.IsActive)
+				.FirstAsync(b => b.Id == beerId);
+
+			beer.IsActive = false;
+
+			await _dbContext.SaveChangesAsync();
+		}
+
 		public async Task EditBeerByIdAndFormModelAsync(int beerId, BeerFormModel model)
 		{
 			Beer beer = await _dbContext
@@ -133,6 +145,21 @@ namespace GepardOOD.Services.Data
 				.AnyAsync(b => b.Id == beerId);
 
 			return result;
+		}
+
+		public async Task<BeerPreDeleteViewModel> GetBeerForDeleteByIdAsync(int beerId)
+		{
+			Beer beer = await _dbContext
+				.Beers
+				.Where(b => b.IsActive)
+				.FirstAsync(b => b.Id == beerId);
+
+			return new BeerPreDeleteViewModel
+			{
+				Name = beer.Name,
+				Manufacturer = beer.Manufacturer,
+				ImageUrl = beer.ImageUrl
+			};
 		}
 
 		public async Task<BeerFormModel> GetBeerForEditByIdAsync(int beerId)

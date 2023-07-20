@@ -193,12 +193,12 @@ namespace GepardOOD.Services.Data
 			await _data.SaveChangesAsync();
 		}
 
-		public async Task<SodaPreDeleteViewModel> GetBeerForDeleteByIdAsync(int sodaId)
+		public async Task<SodaPreDeleteViewModel> GetSodaForDeleteByIdAsync(int sodaId)
 		{
 			Soda soda = await _data
 				.Sodas
-				.Where(b => b.IsActive)
-				.FirstAsync(b => b.Id == sodaId);
+				.Where(s => s.IsActive)
+				.FirstAsync(s => s.Id == sodaId);
 
 			return new SodaPreDeleteViewModel()
 			{
@@ -208,12 +208,12 @@ namespace GepardOOD.Services.Data
 			};
 		}
 
-		public async Task DeleteBeerByIdAsync(int sodaId)
+		public async Task DeleteSodaByIdAsync(int sodaId)
 		{
 			Soda soda = await _data
 				.Sodas
-				.Where(b => b.IsActive)
-				.FirstAsync(b => b.Id == sodaId);
+				.Where(s => s.IsActive)
+				.FirstAsync(s => s.Id == sodaId);
 
 			soda.IsActive = false;
 

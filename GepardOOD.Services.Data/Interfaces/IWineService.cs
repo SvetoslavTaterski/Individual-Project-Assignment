@@ -1,4 +1,5 @@
 ﻿using GepardOOD.Services.Data.Models.Wine;
+using GepardOOD.Web.ViewModels.Soda;
 using GepardOOD.Web.ViewModels.Wine;
 
 namespace GepardOOD.Services.Data.Interfaces
@@ -20,5 +21,9 @@ namespace GepardOOD.Services.Data.Interfaces
 		Task<bool> IsAssociateWithIdOwnerOfWineWithIdAsync(int wineId, string associateId);
 
 		Task EditWineByIdAndFormModelAsync(int wineId, WineFormModel model);
+
+		Task<WinePreDeleteViewModel> GetWineForDeleteByIdAsync(int wineId);
+
+		Task DeleteWineByIdAsync(int wineId);
 	}
 }

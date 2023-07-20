@@ -327,7 +327,7 @@ namespace GepardOOD.Web.Controllers
 
 			try
 			{
-				SodaPreDeleteViewModel viewModel = await _sodaService.GetBeerForDeleteByIdAsync(id);
+				SodaPreDeleteViewModel viewModel = await _sodaService.GetSodaForDeleteByIdAsync(id);
 
 				return this.View(viewModel);
 			}
@@ -377,7 +377,7 @@ namespace GepardOOD.Web.Controllers
 
 			try
 			{
-				await _sodaService.DeleteBeerByIdAsync(id);
+				await _sodaService.DeleteSodaByIdAsync(id);
 
 				TempData[WarningMessage] = "The soda was successfully deleted!";
 

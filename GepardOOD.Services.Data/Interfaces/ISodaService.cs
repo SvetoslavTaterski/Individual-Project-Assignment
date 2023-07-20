@@ -23,8 +23,8 @@ namespace GepardOOD.Services.Data.Interfaces
 
 		Task EditSodaByIdAndFormModelAsync(int sodaId, SodaFormModel model);
 
-		Task<SodaPreDeleteViewModel> GetBeerForDeleteByIdAsync(int sodaId);
+		Task<SodaPreDeleteViewModel> GetSodaForDeleteByIdAsync(int sodaId);
 
-		Task DeleteBeerByIdAsync(int sodaId);
+		Task DeleteSodaByIdAsync(int sodaId);
 	}
 }

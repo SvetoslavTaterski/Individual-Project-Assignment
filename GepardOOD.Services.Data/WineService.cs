@@ -7,6 +7,7 @@ using GepardOOD.Web.ViewModels.Wine.Enums;
 using Wine = GepardOOD.Data.Models.Wine;
 
 using Microsoft.EntityFrameworkCore;
+using GepardOOD.Web.ViewModels.Soda;
 
 namespace GepardOOD.Services.Data
 {
@@ -108,6 +109,18 @@ namespace GepardOOD.Services.Data
 			await _data.SaveChangesAsync();
 		}
 
+		public async Task DeleteWineByIdAsync(int wineId)
+		{
+			Wine wine = await _data
+				.Wines
+				.Where(w => w.IsActive)
+				.FirstAsync(w => w.Id == wineId);
+
+			wine.IsActive = false;
+
+			await _data.SaveChangesAsync();
+		}
+
 		public async Task EditWineByIdAndFormModelAsync(int wineId, WineFormModel model)
 		{
 			Wine wine = await _data
@@ -159,6 +172,21 @@ namespace GepardOOD.Services.Data
 					Email = wine.Associate.User.Email,
 					PhoneNumber = wine.Associate.PhoneNumber
 				}
+			};
+		}
+
+		public async Task<WinePreDeleteViewModel> GetWineForDeleteByIdAsync(int wineId)
+		{
+			Wine wine = await _data
+				.Wines
+				.Where(w => w.IsActive)
+				.FirstAsync(w => w.Id == wineId);
+
+			return new WinePreDeleteViewModel()
+			{
+				Name = wine.Name,
+				Manufacturer = wine.Manufacturer,
+				ImageUrl = wine.ImageUrl
 			};
 		}
 

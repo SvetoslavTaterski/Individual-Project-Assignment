@@ -34,22 +34,17 @@
 			<div class="form-inline">
 				@if (this.User.Identity?.IsAuthenticated ?? false)
 				{
-
-					<a class="btn btn-warning" asp-controller="Beer" asp-action="Edit"
+					@if (isUserAssociate || User.IsAdmin())
+					{
+							<a class="btn btn-warning" asp-controller="Beer" asp-action="Edit"
 				   asp-route-id="@Model.Id">Edit</a>
-					<a class="ml-2 btn btn-danger" asp-controller="Beer" asp-action="Delete"
+							<a class="ml-2 btn btn-danger" asp-controller="Beer" asp-action="Delete"
 					   asp-route-id="@Model.Id">Delete</a>
-					<a class="ml-2 btn btn-primary" asp-controller="Beer" asp-action="Buy"
+
+					}
+						<a class="ml-2 btn btn-primary" asp-controller="Beer" asp-action="Buy"
 				   asp-route-id="@Model.Id">Buy</a>
 
-
-					@if (!isUserAssociate)
-					{
-						<form class="ml-2" asp-controller="Beer"
-					  asp-action="Buy" asp-route-id="@Model.Id" method="post">
-							<input class="btn btn-primary" type="submit" value="Buy" />
-						</form>
-					}
 				}
 			</div>
 			<p></p>

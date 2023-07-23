@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using GepardOOD.Web.Infrastructure.Extensions;
 using GepardOOD.Services.Data.Models.Wine;
-using GepardOOD.Services.Data;
+
 
 
 namespace GepardOOD.Web.Controllers
@@ -193,7 +193,7 @@ namespace GepardOOD.Web.Controllers
 
 			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(User.GetId()!);
 
-			if (!isUserAssociate)
+			if (!isUserAssociate && !User.IsAdmin())
 			{
 				TempData[ErrorMessage] = "You must become an associate in order to edit wine info!";
 
@@ -206,7 +206,7 @@ namespace GepardOOD.Web.Controllers
 			bool isAssociateOwner = await _wineService
 				.IsAssociateWithIdOwnerOfWineWithIdAsync(id, associateId!);
 
-			if (!isAssociateOwner)
+			if (!isAssociateOwner && !User.IsAdmin())
 			{
 				TempData[ErrorMessage] = "You must be the owner of the wine in order to edit it!";
 
@@ -252,7 +252,7 @@ namespace GepardOOD.Web.Controllers
 
 			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(User.GetId()!);
 
-			if (!isUserAssociate)
+			if (!isUserAssociate && !User.IsAdmin())
 			{
 				TempData[ErrorMessage] = "You must become an associate in order to edit wine info!";
 
@@ -265,7 +265,7 @@ namespace GepardOOD.Web.Controllers
 			bool isAssociateOwner = await _wineService
 				.IsAssociateWithIdOwnerOfWineWithIdAsync(id, associateId!);
 
-			if (!isAssociateOwner)
+			if (!isAssociateOwner && !User.IsAdmin())
 			{
 				TempData[ErrorMessage] = "You must be the owner of the wine in order to edit it!";
 
@@ -304,7 +304,7 @@ namespace GepardOOD.Web.Controllers
 
 			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(User.GetId()!);
 
-			if (!isUserAssociate)
+			if (!isUserAssociate && !User.IsAdmin())
 			{
 				TempData[ErrorMessage] = "You must become an associate in order to edit wine info!";
 
@@ -317,7 +317,7 @@ namespace GepardOOD.Web.Controllers
 			bool isAssociateOwner = await _wineService
 				.IsAssociateWithIdOwnerOfWineWithIdAsync(id, associateId!);
 
-			if (!isAssociateOwner)
+			if (!isAssociateOwner && !User.IsAdmin())
 			{
 				TempData[ErrorMessage] = "You must be the owner of the wine in order to edit it!";
 
@@ -354,7 +354,7 @@ namespace GepardOOD.Web.Controllers
 
 			bool isUserAssociate = await _associateService.AssociateExistByUserIdAsync(User.GetId()!);
 
-			if (!isUserAssociate)
+			if (!isUserAssociate && !User.IsAdmin())
 			{
 				TempData[ErrorMessage] = "You must become an associate in order to edit wine info!";
 
@@ -367,7 +367,7 @@ namespace GepardOOD.Web.Controllers
 			bool isAssociateOwner = await _wineService
 				.IsAssociateWithIdOwnerOfWineWithIdAsync(id, associateId!);
 
-			if (!isAssociateOwner)
+			if (!isAssociateOwner && !User.IsAdmin())
 			{
 				TempData[ErrorMessage] = "You must be the owner of the wine in order to edit it!";
 

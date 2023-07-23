@@ -20,17 +20,20 @@
 			</h6>
 			<br />
 			<a asp-controller="Whiskey" asp-action="Details" asp-route-id="@Model.Id"
-			   class="btn btn-success">Details</a>
+	  class="btn btn-success">Details</a>
 
 			@if (this.User.Identity?.IsAuthenticated ?? false)
 			{
-                
-				<a asp-controller="Whiskey" asp-action="Edit" asp-route-id="@Model.Id"
-				   class="btn btn-warning">Edit</a>
-				<a asp-controller="Whiskey" asp-action="Delete" asp-route-id="@Model.Id"
-				   class="btn btn-danger">Delete</a>
+				@if (isUserAssociate || User.IsAdmin())
+				{
+					<a asp-controller="Whiskey" asp-action="Edit" asp-route-id="@Model.Id"
+			  class="btn btn-warning">Edit</a>
+					<a asp-controller="Whiskey" asp-action="Delete" asp-route-id="@Model.Id"
+			  class="btn btn-danger">Delete</a>
+
+				}
 				<a asp-controller="Whiskey" asp-action="Buy" asp-route-id="@Model.Id"
-				   class="btn btn-primary">Buy</a>
+		  class="btn btn-primary">Buy</a>
 				<p></p>
 			}
 		</div>

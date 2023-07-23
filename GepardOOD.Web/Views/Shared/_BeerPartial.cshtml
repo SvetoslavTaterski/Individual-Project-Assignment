@@ -5,34 +5,38 @@
 @inject IAssociateService AssociateService
 @inject IBeerService BeerService
 @{
-    bool isUserAssociate = await AssociateService.AssociateExistByUserIdAsync(this.User.GetId()!);
+	bool isUserAssociate = await AssociateService.AssociateExistByUserIdAsync(this.User.GetId()!);
 }
 
 <div class="col-md-4">
-    <div class="card mb-3">
-        <img class="card-img-top" src="@Model.ImageUrl" alt="Beer Image">
-        <div class="card-body text-center">
-            <h4>@Model.Name</h4>
-            <h6>Manufacturer: <b>@Model.Manufacturer</b></h6>
-            <h6>
-                Price:
-                <b>@($"{Model.Price:f2}") BGN</b>
-            </h6>
-	        <br />
-            <a asp-controller="Beer" asp-action="Details" asp-route-id="@Model.Id"
-               class="btn btn-success">Details</a>
+	<div class="card mb-3">
+		<img class="card-img-top" src="@Model.ImageUrl" alt="Beer Image">
+		<div class="card-body text-center">
+			<h4>@Model.Name</h4>
+			<h6>Manufacturer: <b>@Model.Manufacturer</b></h6>
+			<h6>
+				Price:
+				<b>@($"{Model.Price:f2}") BGN</b>
+			</h6>
+			<br />
+			<a asp-controller="Beer" asp-action="Details" asp-route-id="@Model.Id"
+	  class="btn btn-success">Details</a>
 
-            @if (this.User.Identity?.IsAuthenticated ?? false)
-            {
-                
-                    <a asp-controller="Beer" asp-action="Edit" asp-route-id="@Model.Id"
-                       class="btn btn-warning">Edit</a>
-	            <a asp-controller="Beer" asp-action="Delete" asp-route-id="@Model.Id"
-	               class="btn btn-danger">Delete</a>
-	            <a asp-controller="Beer" asp-action="Buy" asp-route-id="@Model.Id"
-	               class="btn btn-primary">Buy</a>
-	            <p></p>
-            }
-        </div>
-    </div>
+			@if (this.User.Identity?.IsAuthenticated ?? false)
+			{
+				@if (isUserAssociate || User.IsAdmin())
+				{
+
+					<a asp-controller="Beer" asp-action="Edit" asp-route-id="@Model.Id"
+			  class="btn btn-warning">Edit</a>
+					<a asp-controller="Beer" asp-action="Delete" asp-route-id="@Model.Id"
+			  class="btn btn-danger">Delete</a>
+				}
+
+				<a asp-controller="Beer" asp-action="Buy" asp-route-id="@Model.Id"
+		  class="btn btn-primary">Buy</a>
+				<p></p>
+			}
+		</div>
+	</div>
 </div>

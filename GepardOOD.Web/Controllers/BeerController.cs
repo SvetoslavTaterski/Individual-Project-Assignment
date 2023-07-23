@@ -384,5 +384,13 @@ namespace GepardOOD.Web.Controllers
 				return RedirectToAction("Index", "Home");
 			}
 		}
+
+		[HttpGet]
+		public async Task<IActionResult> Buy()
+		{
+			TempData[SuccessMessage] = "The beer was successfully bought!";
+
+			return RedirectToAction("All", "Beer");
+		}
 	}
 }

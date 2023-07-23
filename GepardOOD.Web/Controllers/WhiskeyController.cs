@@ -6,7 +6,7 @@ using GepardOOD.Services.Data.Models.Whiskey;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using GepardOOD.Services.Data;
+
 
 
 namespace GepardOOD.Web.Controllers
@@ -390,6 +390,14 @@ namespace GepardOOD.Web.Controllers
 
 				return RedirectToAction("Index", "Home");
 			}
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Buy()
+		{
+			TempData[SuccessMessage] = "The whiskey was successfully bought!";
+
+			return RedirectToAction("All", "Whiskey");
 		}
 	}
 }

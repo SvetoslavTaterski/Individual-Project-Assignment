@@ -151,6 +151,9 @@ namespace GepardOOD.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<Guid?>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -161,6 +164,8 @@ namespace GepardOOD.Data.Migrations
                     b.HasIndex("BeerCategoryId");
 
                     b.HasIndex("ClientId");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Beers");
 
@@ -241,6 +246,28 @@ namespace GepardOOD.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("GepardOOD.Data.Models.Order", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("TotalCost")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("GepardOOD.Data.Models.Soda", b =>
                 {
                     b.Property<int>("Id")
@@ -280,6 +307,9 @@ namespace GepardOOD.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<Guid?>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -291,6 +321,8 @@ namespace GepardOOD.Data.Migrations
                     b.HasIndex("AssociateId");
 
                     b.HasIndex("ClientId");
+
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("SodaCategoryId");
 
@@ -366,6 +398,9 @@ namespace GepardOOD.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<Guid?>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -377,6 +412,8 @@ namespace GepardOOD.Data.Migrations
                     b.HasIndex("AssociateId");
 
                     b.HasIndex("ClientId");
+
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("WhiskeyCategoryId");
 
@@ -452,6 +489,9 @@ namespace GepardOOD.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<Guid?>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -463,6 +503,8 @@ namespace GepardOOD.Data.Migrations
                     b.HasIndex("AssociateId");
 
                     b.HasIndex("ClientId");
+
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("WineCategoryId");
 
@@ -668,11 +710,26 @@ namespace GepardOOD.Data.Migrations
                         .WithMany("BoughtBeers")
                         .HasForeignKey("ClientId");
 
+                    b.HasOne("GepardOOD.Data.Models.Order", null)
+                        .WithMany("OrderedBeers")
+                        .HasForeignKey("OrderId");
+
                     b.Navigation("Associate");
 
                     b.Navigation("BeerCategory");
 
                     b.Navigation("Client");
+                });
+
+            modelBuilder.Entity("GepardOOD.Data.Models.Order", b =>
+                {
+                    b.HasOne("GepardOOD.Data.Models.ApplicationUser", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("GepardOOD.Data.Models.Soda", b =>
@@ -686,6 +743,10 @@ namespace GepardOOD.Data.Migrations
                     b.HasOne("GepardOOD.Data.Models.ApplicationUser", "Client")
                         .WithMany()
                         .HasForeignKey("ClientId");
+
+                    b.HasOne("GepardOOD.Data.Models.Order", null)
+                        .WithMany("OrderedSoda")
+                        .HasForeignKey("OrderId");
 
                     b.HasOne("GepardOOD.Data.Models.SodaCategory", "SodaCategory")
                         .WithMany("Sodas")
@@ -712,6 +773,10 @@ namespace GepardOOD.Data.Migrations
                         .WithMany()
                         .HasForeignKey("ClientId");
 
+                    b.HasOne("GepardOOD.Data.Models.Order", null)
+                        .WithMany("OrderedWhiskey")
+                        .HasForeignKey("OrderId");
+
                     b.HasOne("GepardOOD.Data.Models.WhiskeyCategory", "WhiskeyCategory")
                         .WithMany("Whiskeys")
                         .HasForeignKey("WhiskeyCategoryId")
@@ -736,6 +801,10 @@ namespace GepardOOD.Data.Migrations
                     b.HasOne("GepardOOD.Data.Models.ApplicationUser", "Client")
                         .WithMany()
                         .HasForeignKey("ClientId");
+
+                    b.HasOne("GepardOOD.Data.Models.Order", null)
+                        .WithMany("OrderedWines")
+                        .HasForeignKey("OrderId");
 
                     b.HasOne("GepardOOD.Data.Models.WineCategory", "WineCategory")
                         .WithMany("Wines")
@@ -804,6 +873,8 @@ namespace GepardOOD.Data.Migrations
             modelBuilder.Entity("GepardOOD.Data.Models.ApplicationUser", b =>
                 {
                     b.Navigation("BoughtBeers");
+
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("GepardOOD.Data.Models.Associate", b =>
@@ -820,6 +891,17 @@ namespace GepardOOD.Data.Migrations
             modelBuilder.Entity("GepardOOD.Data.Models.BeerCategory", b =>
                 {
                     b.Navigation("Beers");
+                });
+
+            modelBuilder.Entity("GepardOOD.Data.Models.Order", b =>
+                {
+                    b.Navigation("OrderedBeers");
+
+                    b.Navigation("OrderedSoda");
+
+                    b.Navigation("OrderedWhiskey");
+
+                    b.Navigation("OrderedWines");
                 });
 
             modelBuilder.Entity("GepardOOD.Data.Models.SodaCategory", b =>

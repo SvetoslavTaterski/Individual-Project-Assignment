@@ -12,7 +12,7 @@ using GepardOOD.Services.Data;
 
 namespace GepardOOD.Web.Controllers
 {
-    [Authorize]
+	[Authorize]
 	public class SodaController : Controller
 	{
 		private readonly IAssociateService _associateService;
@@ -70,7 +70,7 @@ namespace GepardOOD.Web.Controllers
 				return RedirectToAction("Index", "Home");
 			}
 
-			
+
 		}
 
 		[HttpPost]
@@ -391,6 +391,15 @@ namespace GepardOOD.Web.Controllers
 
 				return RedirectToAction("Index", "Home");
 			}
+
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Buy()
+		{
+			TempData[SuccessMessage] = "The soda was successfully bought!";
+
+			return RedirectToAction("All", "Soda");
 		}
 	}
 }

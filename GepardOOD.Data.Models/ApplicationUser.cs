@@ -11,5 +11,7 @@ namespace GepardOOD.Data.Models
         }
         
         public virtual ICollection<Beer> BoughtBeers { get; set; }
-    }
+
+        public ICollection<Order> Orders { get; set; } = new HashSet<Order>();
+	}
 }

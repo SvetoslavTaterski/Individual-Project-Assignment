@@ -2084,7 +2084,8 @@
       },
       "GepardOOD.Web.ViewModels/1.0.0": {
         "dependencies": {
-          "GepardOOD.Common": "1.0.0"
+          "GepardOOD.Common": "1.0.0",
+          "GepardOOD.Data.Models": "1.0.0"
         },
         "runtime": {
           "GepardOOD.Web.ViewModels.dll": {}

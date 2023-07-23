@@ -38,7 +38,10 @@
 					<a class="btn btn-warning" asp-controller="Beer" asp-action="Edit"
 				   asp-route-id="@Model.Id">Edit</a>
 					<a class="ml-2 btn btn-danger" asp-controller="Beer" asp-action="Delete"
-				   asp-route-id="@Model.Id">Delete</a>
+					   asp-route-id="@Model.Id">Delete</a>
+					<a class="ml-2 btn btn-primary" asp-controller="Beer" asp-action="Buy"
+				   asp-route-id="@Model.Id">Buy</a>
+
 
 					@if (!isUserAssociate)
 					{

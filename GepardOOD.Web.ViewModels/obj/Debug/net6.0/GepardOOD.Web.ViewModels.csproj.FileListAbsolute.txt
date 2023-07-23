@@ -13,3 +13,5 @@ C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\Gep
 C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.ViewModels\bin\Debug\net6.0\GepardOOD.Common.dll
 C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.ViewModels\bin\Debug\net6.0\GepardOOD.Common.pdb
 C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.ViewModels\obj\Debug\net6.0\GepardOOD.Web.ViewModels.csproj.CopyComplete
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.ViewModels\bin\Debug\net6.0\GepardOOD.Data.Models.dll
+C:\Users\Acer\OneDrive\Desktop\SoftUni\ASP.NET\Individual Project Assignment\GepardOOD.Web.ViewModels\bin\Debug\net6.0\GepardOOD.Data.Models.pdb

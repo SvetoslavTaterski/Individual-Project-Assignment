@@ -1,0 +1,46 @@
+﻿@model GepardOOD.Web.ViewModels.Order.OrderViewModel
+
+@{
+	ViewData["Title"] = "Complete order";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr/>
+
+@if (Model.OrderedBeers == null 
+     && Model.OrderedSodas == null 
+     && Model.OrderedWines == null 
+     && Model.OrderedWhiskeys == null)
+{
+	<h2 class="text-center">You do not have any added Items yet!</h2>
+}
+else
+{
+	<div class="row">
+		@foreach (BeerAllViewModel beer in Model.OrderedBeers)
+		{
+			<partial name="_BeerPartial" model="beer"/>
+		}
+	</div>
+
+	<div class="row">
+		@foreach (SodaAllViewModel soda in Model.OrderedSodas)
+		{
+			<partial name="_SodaPartial" model="soda"/>
+		}
+	</div>
+
+	<div class="row">
+		@foreach (WineAllViewModel wine in Model.OrderedWines)
+		{
+			<partial name="_WinePartial" model="wine" />
+		}
+	</div>
+
+	<div class="row">
+		@foreach (WhiskeyAllViewModel whiskey in Model.OrderedWhiskeys)
+		{
+			<partial name="_WhiskeyPartial" model="whiskey" />
+		}
+	</div>
+}

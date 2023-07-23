@@ -455,6 +455,9 @@
             "projectReferences": {
               "C:\\Users\\Acer\\OneDrive\\Desktop\\SoftUni\\ASP.NET\\Individual Project Assignment\\GepardOOD.Common\\GepardOOD.Common.csproj": {
                 "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\SoftUni\\ASP.NET\\Individual Project Assignment\\GepardOOD.Common\\GepardOOD.Common.csproj"
+              },
+              "C:\\Users\\Acer\\OneDrive\\Desktop\\SoftUni\\ASP.NET\\Individual Project Assignment\\GepardOOD.Data.Models\\GepardOOD.Data.Models.csproj": {
+                "projectPath": "C:\\Users\\Acer\\OneDrive\\Desktop\\SoftUni\\ASP.NET\\Individual Project Assignment\\GepardOOD.Data.Models\\GepardOOD.Data.Models.csproj"
               }
             }
           }

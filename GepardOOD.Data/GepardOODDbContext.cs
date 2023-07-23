@@ -32,6 +32,9 @@ namespace GepardOOD.Web.Data
 
         public DbSet<Associate> Associates { get; set; } = null!;
 
+        public DbSet<Order> Orders { get; set; } = null!;
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             Assembly configAssembly = Assembly.GetAssembly(typeof(GepardOODDbContext)) ??

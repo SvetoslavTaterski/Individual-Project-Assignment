@@ -27,8 +27,10 @@
                 
                     <a asp-controller="Beer" asp-action="Edit" asp-route-id="@Model.Id"
                        class="btn btn-warning">Edit</a>
-                    <a asp-controller="Beer" asp-action="Delete" asp-route-id="@Model.Id"
-                       class="btn btn-danger">Delete</a>
+	            <a asp-controller="Beer" asp-action="Delete" asp-route-id="@Model.Id"
+	               class="btn btn-danger">Delete</a>
+	            <a asp-controller="Beer" asp-action="Buy" asp-route-id="@Model.Id"
+	               class="btn btn-primary">Buy</a>
 	            <p></p>
             }
         </div>

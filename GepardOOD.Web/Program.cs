@@ -1,10 +1,11 @@
 using GepardOOD.Data.Models;
-using GepardOOD.Services.Data;
 using GepardOOD.Services.Data.Interfaces;
 using GepardOOD.Web.Data;
 using GepardOOD.Web.Infrastructure.Extensions;
 using GepardOOD.Web.Infrastructure.ModelBinders;
+using static GepardOOD.Common.GeneralApplicationConstants;
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace GepardOOD.Web
@@ -29,6 +30,7 @@ namespace GepardOOD.Web
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequiredLength = 4;
                 })
+	            .AddRoles<IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<GepardOODDbContext>();
 
             builder.Services.AddApplicationServices(typeof(IBeerService));
@@ -60,6 +62,8 @@ namespace GepardOOD.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.SeedAdministrator(DevelopmentAdminEmail);
 
             app.MapControllerRoute(
                 name: "default",

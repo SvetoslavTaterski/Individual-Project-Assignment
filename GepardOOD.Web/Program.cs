@@ -48,10 +48,11 @@ namespace GepardOOD.Web
             {
                 app.UseMigrationsEndPoint();
                 app.UseDeveloperExceptionPage();
+                app.UseExceptionHandler("/Home/Error/500");
+                app.UseStatusCodePagesWithRedirects("/Home/Error?statusCode={0}");
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
 

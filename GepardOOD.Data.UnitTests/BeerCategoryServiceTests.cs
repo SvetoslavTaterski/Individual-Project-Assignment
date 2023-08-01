@@ -2,13 +2,12 @@
 using GepardOOD.Services.Data;
 using GepardOOD.Services.Data.Interfaces;
 using GepardOOD.Web.Data;
-using GepardOOD.Web.ViewModels.Category;
 using Microsoft.EntityFrameworkCore;
 
 namespace GepardOOD.Data.UnitTests
 {
 	[TestFixture]
-	internal class BeerCategoryServiceTests
+	public class BeerCategoryServiceTests
 	{
 		private GepardOODDbContext _dbContext;
 

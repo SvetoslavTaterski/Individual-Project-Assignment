@@ -4,6 +4,7 @@ using GepardOOD.Services.Data.Interfaces;
 using GepardOOD.Web.Data;
 using GepardOOD.Web.ViewModels.Beer;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 
 namespace GepardOOD.Data.UnitTests
 {
@@ -51,6 +52,28 @@ namespace GepardOOD.Data.UnitTests
 			Assert.AreEqual(serviceBeers.Count(),dbBeers.Length);
 		}
 
-		
+		[Test]
+		[TestCase(1)]
+		public async Task AreBeerIdsEqualFromGetBeerForDeleteMethod(int beerId)
+		{
+			Beer beer = await _data
+				.Beers
+				.Where(b => b.IsActive)
+				.FirstAsync(b => b.Id == beerId);
+
+			BeerPreDeleteViewModel beerPreDeleteViewModel = new BeerPreDeleteViewModel()
+			{
+				Name = beer.Name,
+				Manufacturer = beer.Manufacturer,
+				ImageUrl = beer.ImageUrl
+			};
+
+			IBeerService beerService = new BeerService(_data);
+
+			var serviceResult = await beerService.GetBeerForDeleteByIdAsync(beerId);
+
+			Assert.AreEqual(beerPreDeleteViewModel.Name,serviceResult.Name);
+
+		}
 	}
 }

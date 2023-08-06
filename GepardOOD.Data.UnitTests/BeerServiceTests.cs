@@ -2,12 +2,10 @@
 using GepardOOD.Services.Data;
 using GepardOOD.Services.Data.Interfaces;
 using GepardOOD.Web.Data;
-using GepardOOD.Web.ViewModels.Associate;
 using GepardOOD.Web.ViewModels.Beer;
-using Microsoft.EntityFrameworkCore;
-using Moq;
-
 using static GepardOOD.Data.UnitTests.BeerServiceSeeder.BeerDatabaseSeeder;
+
+using Microsoft.EntityFrameworkCore;
 
 namespace GepardOOD.Data.UnitTests
 {
@@ -146,7 +144,15 @@ namespace GepardOOD.Data.UnitTests
 		}
 
 		[Test]
-		[TestCase(25)]
-		public async Task Test_
+		[TestCase("48942044-CE1F-4743-9FEC-15C6808BB427")]
+		public async Task Test_AllByAssociateIdAsync(string associateId)
+		{
+			IBeerService beerService = new BeerService(dbContext);
+
+			var result = beerService.AllByAssociateIdAsync(associateId);
+
+			Assert.IsNotNull(result);
+			Assert.IsInstanceOf<Task<IEnumerable<BeerAllViewModel>>>(result);
+		}
 	}
 }

@@ -3,55 +3,55 @@ using GepardOOD.Web.Data;
 
 namespace GepardOOD.Data.UnitTests.ServiceSeeders
 {
-	public static class WineDatabaseSeeder
+	public static class SodaDatabaseSeeder
 	{
 		public static void SeedDatabase(GepardOODDbContext dbContext)
 		{
-			Wine wine = new Wine
+			Soda soda = new Soda
 			{
 				Id = 25,
-				Name = "Wine",
+				Name = "Soda",
 				Manufacturer = "Manufacturer",
-				Description = "Very cool description for very cool wine asdas dsad asd sad",
+				Description = "Very cool description for a very cool soda asdadsa dsad sad sad",
 				ImageUrl = "Random",
-				Price = 15,
+				Price = 2,
 				IsActive = true,
-				WineCategoryId = 1,
+				SodaCategoryId = 1,
 				AssociateId = Guid.Parse("48942044-CE1F-4743-9FEC-15C6808BB427"),
 				ClientId = Guid.Parse("61A22398-32D9-4ADB-EDAF-08DB7B0B2A29")
 			};
 
-			Wine wine2 = new Wine
+			Soda soda2 = new Soda
 			{
 				Id = 26,
-				Name = "Wine2",
+				Name = "Soda2",
 				Manufacturer = "Manufacturer2",
-				Description = "Very cool description for very cool wine asdas dsad asd sad",
+				Description = "Very cool description for a very cool soda asdadsa dsad sad sad",
 				ImageUrl = "Random",
-				Price = 15,
+				Price = 2,
 				IsActive = true,
-				WineCategoryId = 1,
+				SodaCategoryId = 1,
 				AssociateId = Guid.Parse("48942044-CE1F-4743-9FEC-15C6808BB427"),
 				ClientId = Guid.Parse("61A22398-32D9-4ADB-EDAF-08DB7B0B2A29")
 			};
 
-			Wine wine3 = new Wine
+			Soda soda3 = new Soda
 			{
 				Id = 27,
-				Name = "Wine3",
+				Name = "Soda3",
 				Manufacturer = "Manufacturer3",
-				Description = "Very cool description for very cool wine asdas dsad asd sad",
+				Description = "Very cool description for a very cool soda asdadsa dsad sad sad",
 				ImageUrl = "Random",
-				Price = 15,
+				Price = 2,
 				IsActive = true,
-				WineCategoryId = 1,
+				SodaCategoryId = 1,
 				AssociateId = Guid.Parse("48942044-CE1F-4743-9FEC-15C6808BB427"),
 				ClientId = Guid.Parse("61A22398-32D9-4ADB-EDAF-08DB7B0B2A29")
 			};
 
-			dbContext.Wines.Add(wine);
-			dbContext.Wines.Add(wine2);
-			dbContext.Wines.Add(wine3);
+			dbContext.Sodas.Add(soda);
+			dbContext.Sodas.Add(soda2);
+			dbContext.Sodas.Add(soda3);
 
 			dbContext.SaveChanges();
 		}

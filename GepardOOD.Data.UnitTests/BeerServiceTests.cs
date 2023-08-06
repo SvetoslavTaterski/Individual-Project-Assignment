@@ -2,36 +2,49 @@
 using GepardOOD.Services.Data;
 using GepardOOD.Services.Data.Interfaces;
 using GepardOOD.Web.Data;
+using GepardOOD.Web.ViewModels.Associate;
 using GepardOOD.Web.ViewModels.Beer;
 using Microsoft.EntityFrameworkCore;
 using Moq;
+
+using static GepardOOD.Data.UnitTests.BeerServiceSeeder.BeerDatabaseSeeder;
 
 namespace GepardOOD.Data.UnitTests
 {
 	[TestFixture]
 	public class BeerServiceTests
 	{
-		private GepardOODDbContext _data;
+		private GepardOODDbContext dbContext;
+		private DbContextOptions<GepardOODDbContext> dbOptions;
 
-		[SetUp]
-		public void SetUp()
+		private IBeerService beerService;
+
+		[OneTimeSetUp]
+		public void OneTimeSetUp()
 		{
-			var options = new DbContextOptionsBuilder<GepardOODDbContext>()
+			dbOptions = new DbContextOptionsBuilder<GepardOODDbContext>()
 				.UseInMemoryDatabase(databaseName: "GepardOODDbContext")
 				.Options;
 
-			_data = new GepardOODDbContext(options);
+			dbContext = new GepardOODDbContext(dbOptions);
+
+			this.dbContext.Database.EnsureCreated();
+
+			SeedDatabase(this.dbContext);
+
+			beerService = new BeerService(dbContext);
+
 		}
 
 		[Test]
-		[TestCase(1)]
+		[TestCase(25)]
 		public async Task IsBeerExistingByIdAsync(int beerId)
 		{
-			IBeerService beerService = new BeerService(_data);
+			IBeerService beerService = new BeerService(dbContext);
 
 			var serviceBeer = await beerService.ExistsByIdAsync(beerId);
 
-			var dbBeer = await _data.Beers.AnyAsync(b => b.Id == beerId);
+			var dbBeer = await dbContext.Beers.AnyAsync(b => b.Id == beerId);
 
 			Assert.AreEqual(serviceBeer, dbBeer);
 		}
@@ -39,41 +52,101 @@ namespace GepardOOD.Data.UnitTests
 		[Test]
 		public async Task ReturnsExactlyThreeBeersAsync()
 		{
-			IBeerService beerService = new BeerService(_data);
+			IBeerService beerService = new BeerService(dbContext);
 
 			var serviceBeers = await beerService.ThreeBeersAsync();
 
-			var dbBeers = await _data.Beers
+			var dbBeers = await dbContext.Beers
 				.Where(b => b.IsActive)
 				.OrderByDescending(b => b.Id)
 				.Take(3)
 				.ToArrayAsync();
 
-			Assert.AreEqual(serviceBeers.Count(),dbBeers.Length);
+			Assert.AreEqual(serviceBeers.Count(), dbBeers.Length);
 		}
 
 		[Test]
 		[TestCase(1)]
-		public async Task AreBeerIdsEqualFromGetBeerForDeleteMethod(int beerId)
+		public async Task Test_DeleteBeerByIdAsync(int id)
 		{
-			Beer beer = await _data
+			IBeerService beerService = new BeerService(dbContext);
+
+			var serviceResult = beerService.DeleteBeerByIdAsync(id);
+
+			Assert.IsNotNull(serviceResult);
+
+		}
+
+		[Test]
+		[TestCase(26, "48942044-CE1F-4743-9FEC-15C6808BB427")]
+		public async Task Test_IsAssociateWithIdOwnerOfBeerWithIdAsync(int beerId, string associateId)
+		{
+			IBeerService beerService = new BeerService(dbContext);
+
+			Beer beer = dbContext.Beers.Where(b => b.IsActive).First(b => b.Id == beerId);
+
+			bool isAssociateIdSameService =
+				await beerService.IsAssociateWithIdOwnerOfBeerWithIdAsync(beerId, associateId);
+
+			bool isAssociateIdSame = beer.AssociateId.ToString() == associateId;
+
+			Assert.AreEqual(isAssociateIdSame, isAssociateIdSameService);
+		}
+
+		[Test]
+		[TestCase(25)]
+		public async Task Test_GetDetailsByIdAsync(int beerId)
+		{
+			IBeerService beerService = new BeerService(dbContext);
+
+			var result = beerService.GetDetailsByIdAsync(beerId);
+
+			Assert.IsNotNull(result);
+			Assert.IsInstanceOf<Task<BeerDetailsViewModel>>(result);
+		}
+
+		[Test]
+		[TestCase(25)]
+		public async Task Test_GetBeerForEditByIdAsync(int beerId)
+		{
+			IBeerService beerService = new BeerService(dbContext);
+
+			var result = beerService.GetBeerForEditByIdAsync(beerId);
+
+			Assert.IsNotNull(result);
+			Assert.IsInstanceOf<Task<BeerFormModel>>(result);
+		}
+
+		[Test]
+		[TestCase(25)]
+		public async Task Test_GetBeerForDeleteByIdAsync(int beerId)
+		{
+			IBeerService beerService = new BeerService(dbContext);
+
+			var result = beerService.GetBeerForDeleteByIdAsync(beerId);
+
+			Assert.IsNotNull(result);
+			Assert.IsInstanceOf<Task<BeerPreDeleteViewModel>>(result);
+		}
+
+		[Test]
+		[TestCase(25)]
+		public async Task Test_DeleteBeerByIdAsyncIsBeerPropertyChanged(int beerId)
+		{
+			IBeerService beerService = new BeerService(dbContext);
+
+			Beer beer = await dbContext
 				.Beers
 				.Where(b => b.IsActive)
 				.FirstAsync(b => b.Id == beerId);
 
-			BeerPreDeleteViewModel beerPreDeleteViewModel = new BeerPreDeleteViewModel()
-			{
-				Name = beer.Name,
-				Manufacturer = beer.Manufacturer,
-				ImageUrl = beer.ImageUrl
-			};
+			beerService.DeleteBeerByIdAsync(beer.Id);
 
-			IBeerService beerService = new BeerService(_data);
-
-			var serviceResult = await beerService.GetBeerForDeleteByIdAsync(beerId);
-
-			Assert.AreEqual(beerPreDeleteViewModel.Name,serviceResult.Name);
-
+			Assert.IsFalse(beer.IsActive);
 		}
+
+		[Test]
+		[TestCase(25)]
+		public async Task Test_
 	}
 }

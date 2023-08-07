@@ -6,6 +6,7 @@ using static GepardOOD.Data.UnitTests.ServiceSeeders.WhiskeyDatabaseSeeder;
 
 using Microsoft.EntityFrameworkCore;
 using GepardOOD.Web.ViewModels.Whiskey;
+using GepardOOD.Web.ViewModels.Beer;
 
 namespace GepardOOD.Data.UnitTests
 {
@@ -131,12 +132,67 @@ namespace GepardOOD.Data.UnitTests
 		[TestCase("48942044-CE1F-4743-9FEC-15C6808BB427")]
 		public async Task Test_AllByAssociateIdAsync(string associateId)
 		{
-			IWhiskeyService WhiskeyService = new WhiskeyService(dbContext);
+			IWhiskeyService whiskeyService = new WhiskeyService(dbContext);
 
-			var result = WhiskeyService.AllByAssociateIdAsync(associateId);
+			var result = whiskeyService.AllByAssociateIdAsync(associateId);
 
 			Assert.IsNotNull(result);
 			Assert.IsInstanceOf<Task<IEnumerable<WhiskeyAllViewModel>>>(result);
+		}
+
+		[Test]
+		[TestCase(25)]
+		public async Task GetWhiskeyForEditByIdAsyncReturnsCorrectType(int id)
+		{
+			IWhiskeyService whiskeyService = new WhiskeyService(dbContext);
+
+			var result = whiskeyService.GetWhiskeyForEditByIdAsync(id);
+
+			Assert.IsInstanceOf<Task<WhiskeyFormModel>>(result);
+		}
+
+		[Test]
+		[TestCase(25)]
+		public async Task Test_EditWhiskeyByIdAndFormModelAsync(int id)
+		{
+			IWhiskeyService whiskeyService = new WhiskeyService(dbContext);
+
+			WhiskeyFormModel model = new WhiskeyFormModel
+			{
+				Id = 25,
+				Name = "New Name",
+				Manufacturer = "New Manufacturer",
+				Description = "New very cool Description for very cool item!",
+				ImageUrl = "Random",
+				Price = 2,
+				CategoryId = 1,
+			};
+
+			var result = whiskeyService.EditWhiskeyByIdAndFormModelAsync(id, model);
+
+			Assert.IsInstanceOf<Task>(result);
+		}
+
+		[Test]
+		[TestCase("48942044-CE1F-4743-9FEC-15C6808BB427")]
+		public async Task Test_CreateAsync(string id)
+		{
+			IWhiskeyService whiskeyService = new WhiskeyService(dbContext);
+
+			WhiskeyFormModel model = new WhiskeyFormModel
+			{
+				Id = 25,
+				Name = "New Name",
+				Manufacturer = "New Manufacturer",
+				Description = "New very cool Description for very cool item!",
+				ImageUrl = "Random",
+				Price = 2,
+				CategoryId = 1,
+			};
+
+			var result = whiskeyService.CreateAsync(model, id);
+
+			Assert.IsInstanceOf<Task>(result);
 		}
 	}
 }

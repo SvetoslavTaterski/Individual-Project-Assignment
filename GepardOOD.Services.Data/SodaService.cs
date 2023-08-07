@@ -7,7 +7,6 @@ using GepardOOD.Web.ViewModels.Soda.Enums;
 using Soda = GepardOOD.Data.Models.Soda;
 
 using Microsoft.EntityFrameworkCore;
-using GepardOOD.Web.ViewModels.Beer;
 
 namespace GepardOOD.Services.Data
 {

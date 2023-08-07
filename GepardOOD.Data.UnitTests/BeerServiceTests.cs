@@ -6,6 +6,7 @@ using GepardOOD.Web.ViewModels.Beer;
 using static GepardOOD.Data.UnitTests.BeerServiceSeeder.BeerDatabaseSeeder;
 
 using Microsoft.EntityFrameworkCore;
+using GepardOOD.Web.ViewModels.Soda;
 
 namespace GepardOOD.Data.UnitTests
 {
@@ -153,6 +154,61 @@ namespace GepardOOD.Data.UnitTests
 
 			Assert.IsNotNull(result);
 			Assert.IsInstanceOf<Task<IEnumerable<BeerAllViewModel>>>(result);
+		}
+
+		[Test]
+		[TestCase(25)]
+		public async Task GetBeerForEditByIdAsyncReturnsCorrectType(int id)
+		{
+			IBeerService beerService = new BeerService(dbContext);
+
+			var result = beerService.GetBeerForEditByIdAsync(id);
+
+			Assert.IsInstanceOf<Task<BeerFormModel>>(result);
+		}
+
+		[Test]
+		[TestCase(25)]
+		public async Task Test_EditBeerByIdAndFormModelAsync(int id)
+		{
+			IBeerService beerService = new BeerService(dbContext);
+
+			BeerFormModel model = new BeerFormModel
+			{
+				Id = 25,
+				Name = "New Name",
+				Manufacturer = "New Manufacturer",
+				Description = "New very cool Description for very cool item!",
+				ImageUrl = "Random",
+				Price = 2,
+				CategoryId = 1,
+			};
+
+			var result = beerService.EditBeerByIdAndFormModelAsync(id, model);
+
+			Assert.IsInstanceOf<Task>(result);
+		}
+
+		[Test]
+		[TestCase("48942044-CE1F-4743-9FEC-15C6808BB427")]
+		public async Task Test_CreateAsync(string id)
+		{
+			IBeerService beerService = new BeerService(dbContext);
+
+			BeerFormModel model = new BeerFormModel
+			{
+				Id = 25,
+				Name = "New Name",
+				Manufacturer = "New Manufacturer",
+				Description = "New very cool Description for very cool item!",
+				ImageUrl = "Random",
+				Price = 2,
+				CategoryId = 1,
+			};
+
+			var result = beerService.CreateAsync(model, id);
+
+			Assert.IsInstanceOf<Task>(result);
 		}
 	}
 }

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 using GepardOOD.Data.Models;
 using GepardOOD.Web.ViewModels.Wine;
+using GepardOOD.Web.ViewModels.Soda;
 
 namespace GepardOOD.Data.UnitTests
 {
@@ -140,6 +141,61 @@ namespace GepardOOD.Data.UnitTests
 
 			Assert.IsNotNull(result);
 			Assert.IsInstanceOf<Task<IEnumerable<WineAllViewModel>>>(result);
+		}
+
+		[Test]
+		[TestCase(25)]
+		public async Task GetWineForEditByIdAsyncReturnsCorrectType(int id)
+		{
+			IWineService wineService = new WineService(dbContext);
+
+			var result = wineService.GetWineForEditByIdAsync(id);
+
+			Assert.IsInstanceOf<Task<WineFormModel>>(result);
+		}
+
+		[Test]
+		[TestCase(25)]
+		public async Task Test_EditWineByIdAndFormModelAsync(int id)
+		{
+			IWineService wineService = new WineService(dbContext);
+
+			WineFormModel model = new WineFormModel
+			{
+				Id = 25,
+				Name = "New Name",
+				Manufacturer = "New Manufacturer",
+				Description = "New very cool Description for very cool item!",
+				ImageUrl = "Random",
+				Price = 2,
+				CategoryId = 1,
+			};
+
+			var result = wineService.EditWineByIdAndFormModelAsync(id, model);
+
+			Assert.IsInstanceOf<Task>(result);
+		}
+
+		[Test]
+		[TestCase("48942044-CE1F-4743-9FEC-15C6808BB427")]
+		public async Task Test_CreateAsync(string id)
+		{
+			IWineService wineService = new WineService(dbContext);
+
+			WineFormModel model = new WineFormModel
+			{
+				Id = 25,
+				Name = "New Name",
+				Manufacturer = "New Manufacturer",
+				Description = "New very cool Description for very cool item!",
+				ImageUrl = "Random",
+				Price = 2,
+				CategoryId = 1,
+			};
+
+			var result = wineService.CreateAsync(model, id);
+
+			Assert.IsInstanceOf<Task>(result);
 		}
 	}
 }

@@ -3,10 +3,11 @@ using GepardOOD.Services.Data;
 using GepardOOD.Services.Data.Interfaces;
 using GepardOOD.Web.Data;
 using GepardOOD.Web.ViewModels.Soda;
+using GepardOOD.Web.ViewModels.Soda.Enums;
 using static GepardOOD.Data.UnitTests.ServiceSeeders.SodaDatabaseSeeder;
 
 using Microsoft.EntityFrameworkCore;
-using GepardOOD.Web.ViewModels.Wine;
+using GepardOOD.Services.Data.Models.Soda;
 
 namespace GepardOOD.Data.UnitTests
 {
@@ -138,6 +139,83 @@ namespace GepardOOD.Data.UnitTests
 
 			Assert.IsNotNull(result);
 			Assert.IsInstanceOf<Task<IEnumerable<SodaAllViewModel>>>(result);
+		}
+
+		[Test]
+		[TestCase(25)]
+		public async Task GetSodaForEditByIdAsyncReturnsCorrectType(int id)
+		{
+			ISodaService sodaService = new SodaService(dbContext);
+
+			var result = sodaService.GetSodaForEditByIdAsync(id);
+
+			Assert.IsInstanceOf<Task<SodaFormModel>>(result);
+		}
+
+		[Test]
+		[TestCase(25)]
+		public async Task Test_EditSodaByIdAndFormModelAsync(int id)
+		{
+			ISodaService sodaService = new SodaService(dbContext);
+
+			SodaFormModel model = new SodaFormModel
+			{
+				Id = 25,
+				Name = "New Name",
+				Manufacturer = "New Manufacturer",
+				Description = "New very cool Description for very cool item!",
+				ImageUrl = "Random",
+				Price = 2,
+				CategoryId = 1,
+			};
+
+			var result = sodaService.EditSodaByIdAndFormModelAsync(id, model);
+
+			Assert.IsInstanceOf<Task>(result);
+		}
+
+		[Test]
+		[TestCase("48942044-CE1F-4743-9FEC-15C6808BB427")]
+		public async Task Test_CreateAsync(string id)
+		{
+			ISodaService sodaService = new SodaService(dbContext);
+
+			SodaFormModel model = new SodaFormModel
+			{
+				Id = 25,
+				Name = "New Name",
+				Manufacturer = "New Manufacturer",
+				Description = "New very cool Description for very cool item!",
+				ImageUrl = "Random",
+				Price = 2,
+				CategoryId = 1,
+			};
+
+			var result = sodaService.CreateAsync(model, id);
+
+			Assert.IsInstanceOf<Task>(result);
+		}
+
+		[Test]
+		public async Task Test_AllAsync()
+		{
+			ISodaService sodaService = new SodaService(dbContext);
+
+			AllSodaQueryModel model = new AllSodaQueryModel
+			{
+				Category = null,
+				SearchString = null,
+				SodaSorting = (SodaSorting)0,
+				CurrentPage = 0,
+				SodasPerPage = 0,
+				TotalSodas = 0,
+				Categories = null,
+				Sodas = null
+			};
+
+			var result = sodaService.AllAsync(model);
+
+			Assert.IsInstanceOf<Task<AllSodasFilteredAndPagedServiceModel>>(result);
 		}
 	}
 }
